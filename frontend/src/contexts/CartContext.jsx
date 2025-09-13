@@ -1,10 +1,19 @@
-import React, { createContext, useContext, useMemo, useState } from 'react'
+import React, { createContext, useContext, useMemo, useState, useEffect } from 'react'
 
 const CartCtx = createContext(null)
 export const useCart = () => useContext(CartCtx)
 
 export function CartProvider({ children }){
-  const [items, setItems] = useState([])
+  // Initialize cart from localStorage
+  const [items, setItems] = useState(() => {
+    const storedCart = localStorage.getItem('cartItems');
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
+
+  // Persist cart changes to localStorage
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(items));
+  }, [items]);
 
   const addItem = (p) => {
     setItems(prev => {
@@ -13,13 +22,17 @@ export function CartProvider({ children }){
       return [...prev, { ...p, qty: 1 }]
     })
   }
+  const updateQuantity = (id, qty) => {
+    if (qty < 1) return; // enforce minimum quantity
+    setItems(prev => prev.map(item => item.id === id ? { ...item, qty } : item))
+  }
   const removeItem = (id) => setItems(prev => prev.filter(i => i.id !== id))
   const clear = () => setItems([])
   const itemsCount = useMemo(() => items.reduce((acc,i)=>acc+i.qty,0), [items])
   const total = useMemo(() => items.reduce((acc,i)=>acc+i.price*i.qty,0), [items])
 
   return (
-    <CartCtx.Provider value={{ items, addItem, removeItem, clear, itemsCount, total }}>
+    <CartCtx.Provider value={{ items, addItem, updateQuantity, removeItem, clear, itemsCount, total }}>
       {children}
     </CartCtx.Provider>
   )
