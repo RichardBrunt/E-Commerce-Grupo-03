@@ -25,4 +25,5 @@ export default function Cart(){
       <button onClick={()=>alert('Checkout simulado. Descuento de stock se realiza en backend/mock.')}>Checkout</button>
     </section>
   )
+  
 }
