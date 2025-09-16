@@ -11,9 +11,14 @@ export default function Login(){
 
   const onSubmit = async (e) => {
     e.preventDefault()
+    setError(null)
+    if (!email || !password) {
+      setError('Completa todos los campos')
+      return
+    }
     const u = await login(email, password)
     if (!u) return setError('Credenciales inválidas')
-    navigate('/')
+    navigate('/cart')
   }
 
   return (
