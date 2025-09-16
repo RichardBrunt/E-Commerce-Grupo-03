@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import bannerMacbook from "../assets/img/products/MacbookBannerBody.jpg";
 import MacbookPro from "../assets/img/products/MacbookPro.jpg";
@@ -14,6 +14,7 @@ import SmartTV2 from "../assets/img/products/SmartTV2.jpg";
 import SmartTV3 from "../assets/img/products/SmartTV3.jpg";
 import SmartTV4 from "../assets/img/products/SmartTV4.jpg";
 import "../assets/AppleSection.css";
+import { listProducts } from "../services/api";
 
 const categories = [
   "iPhone",
@@ -25,95 +26,17 @@ const categories = [
   "Accesorios"
 ];
 
-// Ejemplo de productos, reemplaza por tus datos reales
-const products = [
-  {
-    name: "MacBook Pro M1",
-    price: 1799999,
-    oldPrice: 1999999,
-    image: MacbookPro,
-    inStock: true,
-    offer: "10% OFF"
-  },
-  {
-    name: "MacBook Pro M3",
-    price: 1899999,
-    oldPrice: 2099999,
-    image: MacbookPro2,
-    inStock: true,
-    offer: "10% OFF"
-  },
-  {
-    name: "MacBook Pro M4",
-    price: 1699999,
-    oldPrice: 1899999,
-    image: MacbookPro3,
-    inStock: false,
-    offer: "10% OFF"
-  },
-  {
-    name: "MacBook Pro M2",
-    price: 1799999,
-    image: MacbookPro4,
-    inStock: true
-  },
-  {
-    name: "iPhone 17 Pro",
-    price: 1399999,
-    oldPrice: 1499999,
-    image: Iphone17pro,
-    inStock: true,
-    offer: "Nuevo"
-  },
-  {
-    name: "iPhone 17",
-    price: 1299999,
-    image: Iphone17,
-    inStock: true
-  },
-  {
-    name: "iPhone 16",
-    price: 1199999,
-    image: Iphone16,
-    inStock: false
-  },
-  {
-    name: "iPhone Air",
-    price: 899999,
-    oldPrice: 999999,
-    image: IphoneAir,
-    inStock: true,
-    offer: "10% OFF"
-  },
-  {
-    name: "Smart TV 50''",
-    price: 799999,
-    image: SmartTV1,
-    inStock: true
-  },
-  {
-    name: "Smart TV 60''",
-    price: 899999,
-    image: SmartTV2,
-    inStock: true
-  },
-  {
-    name: "Smart TV 40''",
-    price: 899999,
-    oldPrice: 999999,
-    image: SmartTV3,
-    inStock: false,
-    offer: "10% OFF"
-  },
-  {
-    name: "Smart TV 43''",
-    price: 1099999,
-    image: SmartTV4,
-    inStock: true
-  }
-];
+
+
 
 const AppleSection = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    listProducts().then(setProducts).finally(() => setLoading(false));
+  }, []);
+
   return (
     <section className="apple-section">
       {/* Banner principal */}
@@ -140,19 +63,20 @@ const AppleSection = () => {
 
       {/* Cards de productos */}
       <div className="apple-products-grid">
-        {products.map((prod, idx) => (
-          <div className="apple-card" key={idx}>
+        {loading ? <p>Cargando productos...</p> : products.map((prod, idx) => (
+          <div className="apple-card" key={prod.id || idx}>
+            {/* Puedes adaptar la lógica de oferta y stock según los datos reales */}
             {prod.offer && <span className="apple-card-offer">{prod.offer}</span>}
             <img src={prod.image} alt={prod.name} className="apple-card-img" />
             <h2 className="apple-card-title">{prod.name}</h2>
             <div className="apple-card-price-row">
-              <span className="apple-card-price">${prod.price.toLocaleString()}</span>
+              <span className="apple-card-price">${prod.price?.toLocaleString()}</span>
             </div>
             <button
-              className={`apple-btn ${prod.inStock ? "apple-btn-primary" : "apple-btn-disabled"}`}
-              disabled={!prod.inStock}
+              className={`apple-btn ${prod.stock > 0 ? "apple-btn-primary" : "apple-btn-disabled"}`}
+              disabled={prod.stock === 0}
             >
-              {prod.inStock ? "Comprar Ahora" : "Sin Stock"}
+              {prod.stock > 0 ? "Comprar Ahora" : "Sin Stock"}
             </button>
           </div>
         ))}

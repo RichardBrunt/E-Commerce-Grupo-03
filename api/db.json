@@ -2,57 +2,137 @@
   "categories": [
     {
       "id": 1,
-      "name": "Notebooks"
-    },
-    {
-      "id": 2,
-      "name": "Auriculares"
+      "name": "Macbook"
     },
     {
       "id": 3,
-      "name": "Monitores"
+      "name": "Iphone"
     },
     {
       "id": 4,
-      "name": "Teclados"
+      "name": "SmartTV"
     }
   ],
   "products": [
     {
       "id": 1,
-      "name": "Auriculares Z",
-      "categoryId": 2,
-      "price": 19999,
-      "stock": 5,
-      "image": "https://picsum.photos/seed/auris/400/300",
-      "description": "Sonido Hi\u2011Fi y micr\u00f3fono."
+      "name": "MacBook Pro M1",
+      "categoryId": 1,
+      "price": 1799999,
+      "oldPrice": 1999999,
+      "stock": 15,
+  "image": "/img/products/MacbookPro.jpg",
+      "description": "MacBook Pro con chip M1. Sonido Hi-Fi y micrófono.",
+      "offer": "10% OFF"
     },
     {
       "id": 2,
-      "name": "Monitor 27\" QHD",
-      "categoryId": 3,
-      "price": 459999,
-      "stock": 3,
-      "image": "https://picsum.photos/seed/monitor/400/300",
-      "description": "IPS 165Hz con DP."
+      "name": "MacBook Pro M3",
+      "categoryId": 1,
+      "price": 1899999,
+      "oldPrice": 2099999,
+      "stock": 10,
+  "image": "/img/products/MacbookPro2.jpg",
+      "description": "MacBook Pro con chip M3. Potencia y eficiencia.",
+      "offer": "10% OFF"
     },
     {
       "id": 3,
-      "name": "Notebook 14\"",
+      "name": "MacBook Pro M4",
       "categoryId": 1,
-      "price": 799999,
-      "stock": 8,
-      "image": "https://picsum.photos/seed/notebook/400/300",
-      "description": "Liviana para estudiar."
+      "price": 1699999,
+      "oldPrice": 1899999,
+      "stock": 0,
+  "image": "/img/products/MacbookPro3.jpg",
+      "description": "MacBook Pro con chip M4. Última generación.",
+      "offer": "10% OFF"
     },
     {
       "id": 4,
-      "name": "Teclado 60%",
-      "categoryId": 4,
-      "price": 89999,
+      "name": "MacBook Pro M2",
+      "categoryId": 1,
+      "price": 1799999,
+      "stock": 7,
+  "image": "/img/products/MacbookPro4.jpg",
+      "description": "MacBook Pro con chip M2. Rendimiento profesional."
+    },
+    {
+      "id": 5,
+      "name": "iPhone 17 Pro",
+  "categoryId": 3,
+      "price": 1399999,
+      "oldPrice": 1499999,
+      "stock": 12,
+  "image": "/img/products/Iphone 17pro.jpg",
+      "description": "iPhone 17 Pro. Cámara avanzada y gran batería.",
+      "offer": "Nuevo"
+    },
+    {
+      "id": 6,
+      "name": "iPhone 17",
+  "categoryId": 3,
+      "price": 1299999,
+      "stock": 8,
+  "image": "/img/products/Iphone17.jpg",
+      "description": "iPhone 17. Potente y elegante."
+    },
+    {
+      "id": 7,
+      "name": "iPhone 16",
+  "categoryId": 3,
+      "price": 1199999,
       "stock": 0,
-      "image": "https://picsum.photos/seed/teclado/400/300",
-      "description": "Compacto RGB."
+  "image": "/img/products/Iphone16.jpg",
+      "description": "iPhone 16. Gran rendimiento y diseño."
+    },
+    {
+      "id": 8,
+      "name": "iPhone Air",
+  "categoryId": 3,
+      "price": 899999,
+      "oldPrice": 999999,
+      "stock": 5,
+  "image": "/img/products/IphoneAir.jpg",
+      "description": "iPhone Air. Ligero y potente.",
+      "offer": "10% OFF"
+    },
+    {
+      "id": 9,
+      "name": "Smart TV 50''",
+  "categoryId": 4,
+      "price": 799999,
+      "stock": 6,
+  "image": "/img/products/SmartTV1.jpg",
+      "description": "Smart TV 50 pulgadas. 4K UHD."
+    },
+    {
+      "id": 10,
+      "name": "Smart TV 60''",
+  "categoryId": 4,
+      "price": 899999,
+      "stock": 4,
+  "image": "/img/products/SmartTV2.jpg",
+      "description": "Smart TV 60 pulgadas. Experiencia inmersiva."
+    },
+    {
+      "id": 11,
+      "name": "Smart TV 40''",
+  "categoryId": 4,
+      "price": 899999,
+      "oldPrice": 999999,
+      "stock": 0,
+  "image": "/img/products/SmartTV3.jpg",
+      "description": "Smart TV 40 pulgadas. Compacta y eficiente.",
+      "offer": "10% OFF"
+    },
+    {
+      "id": 12,
+      "name": "Smart TV 43''",
+  "categoryId": 4,
+      "price": 1099999,
+      "stock": 2,
+  "image": "/img/products/SmartTV4.jpg",
+      "description": "Smart TV 43 pulgadas. Gran calidad de imagen."
     }
   ],
   "users": []
