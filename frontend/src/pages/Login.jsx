@@ -23,7 +23,8 @@ export default function Login(){
       <input placeholder="Contraseña" type="password" value={password} onChange={e=>setPassword(e.target.value)} required />
       {error && <p style={{color:'tomato'}}>{error}</p>}
       <button>Entrar</button>
-      <p>¿No tenés cuenta? <Link to="/register">Registrate</Link></p>
+      <p>¿No tenés cuenta? <Link to="/register">Registrate aqui</Link></p>
     </form>
   )
 }
+
