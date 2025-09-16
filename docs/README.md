@@ -11,7 +11,7 @@ npm install
 npm run dev   # http://localhost:3000
 
 # 2) Frontend
-cd ../frontend
+cd "C:\Users\juanu\Documents\UADE\Proyectos Materias\Aplicaciones Interactivas\Ecommerce\frontend"
 npm install
 npm run dev   # http://localhost:5173
 ```
