@@ -10,6 +10,7 @@ export const deleteProduct = (id) => api.delete(`/products/${id}`)
 
 // Categories
 export const listCategories = () => api.get('/categories').then(r => r.data)
+export const createCategory = (data) => api.post('/categories', data).then(r => r.data)
 
 // Users (fake auth)
 export const registerUser = (data) => api.post('/users', data).then(r => r.data)

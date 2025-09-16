@@ -22,11 +22,13 @@ export const AppRouter = () => (
     <Route path="/cart" element={<Cart />} />
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
-    <Route path="/my-products" element={
+    <Route path="/gestion-stock" element={
       <ProtectedRoute>
         <MyProducts />
       </ProtectedRoute>
     } />
+    {/* Redirección de rutas antiguas */}
+    <Route path="/mercaderia/*" element={<Navigate to="/gestion-stock" replace />} />
     <Route path="*" element={<NotFound />} />
   </Routes>
 )

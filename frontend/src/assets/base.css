@@ -1,12 +1,77 @@
-:root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; }
-body { margin: 0; background: #0b0b0b; color: #eee; }
+:root {
+  /* Tipografía */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+
+  /* Paleta */
+  --bg: #F5F5F5;          /* Fondo general */
+  --text: #1A1A1A;        /* Texto principal */
+  --primary: #000000;     /* Color primario (botones principales) */
+  --secondary: #FFFFFF;   /* Blanco puro (tarjetas, navbar) */
+  --accent: #FFD700;      /* Amarillo vibrante (destacados/badges) */
+  --hover: #333333;       /* Hover/activo */
+  --border: #E5E5E5;      /* Bordes suaves */
+  --muted: #666666;       /* Texto secundario */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
 .container { max-width: 1100px; margin: 1rem auto; padding: 0 1rem; }
 .grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 1rem; }
-.card { background:#171717; border:1px solid #222; border-radius: 14px; padding: .75rem; }
-.footer { border-top:1px solid #222; padding:1rem; text-align:center; margin-top:2rem; color:#aaa; }
-a { color:#61dafb; text-decoration:none; }
-input, select, button { background:#111; color:#eee; border:1px solid #333; border-radius:10px; padding:.5rem .75rem; }
+
+.card {
+  background: var(--secondary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: .75rem;
+}
+
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 1rem;
+  text-align: center;
+  margin-top: 2rem;
+  color: var(--muted);
+  background: var(--secondary);
+}
+
+a { color: var(--primary); text-decoration: none; }
+
+input, select, button {
+  background: var(--secondary);
+  color: var(--text);
+  border: 1px solid rgba(51,51,51,.25);
+  border-radius: 10px;
+  padding: .5rem .75rem;
+}
+input:focus, select:focus, button:focus { outline: none; border-color: var(--hover); }
+
 .row { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center }
-.navbar { display:flex; align-items:center; justify-content:space-between; padding: .75rem 1rem; border-bottom:1px solid #222; position:sticky; top:0; background:#0b0b0b; z-index:10}
-.badge { background:#222; padding:.2rem .45rem; border-radius:999px; font-size:.8rem }
+
+.navbar {
+  display:flex; align-items:center; justify-content:space-between;
+  padding: .75rem 1rem; border-bottom:1px solid var(--border);
+  position:sticky; top:0; background: var(--secondary); z-index:10
+}
+
+.badge { background: var(--accent); color: var(--primary); padding:.2rem .45rem; border-radius:999px; font-size:.8rem }
 .img { width:100%; height:160px; object-fit:cover; border-radius:10px }
+
+/* Botones genéricos (coinciden con las clases usadas en los componentes) */
+.btn { cursor:pointer; padding:.5rem .75rem; border-radius:10px; border:1px solid var(--primary); }
+.btn:hover { filter: brightness(.95); }
+.btn:disabled { opacity:.7; cursor:not-allowed; }
+
+.btn-primary { background: var(--primary); color: var(--secondary); border-color: var(--primary); }
+.btn-secondary { background: var(--secondary); color: var(--primary); border-color: var(--primary); }
+.btn-info { background: var(--primary); color: var(--secondary); border-color: var(--primary); }
+.btn-danger { background: #d32f2f; color:#FFFFFF; border-color:#d32f2f; }
+.btn-outline { background: transparent; color: var(--text); border-color: var(--hover); }
+
+/* Tabla _light_ */
+table { width:100%; border-collapse:separate; border-spacing:0; color: var(--text); }
+thead tr { background: var(--bg); color: var(--text); }
+th, td { text-align:left; padding:12px; }
