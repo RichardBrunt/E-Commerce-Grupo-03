@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { createProduct, deleteProduct, listProducts, updateProduct, listCategories, createCategory } from '@/services/api.js'
+import { createProduct, deleteProduct, listProducts, updateProduct, listCategories } from '@/services/api.js'
 
 export default function MyProducts(){
-  // Modo: listar, ver, crear/editar
   const [mode, setMode] = useState('list')
   const [products, setProducts] = useState([])
   const [selected, setSelected] = useState(null)
@@ -10,7 +9,6 @@ export default function MyProducts(){
   const [error, setError] = useState(null)
   const [saving, setSaving] = useState(false)
   const [errors, setErrors] = useState({})
-  // Estandarizamos a 'category' como texto (igual que mercadería)
   const [form, setForm] = useState({ name:'', price:0, stock:0, image:'', description:'', category:'' })
   const [categoryOptions, setCategoryOptions] = useState([])
 
@@ -34,21 +32,22 @@ export default function MyProducts(){
 
   const goList = () => { setMode('list'); setSelected(null); resetForm() }
   const goNew = () => { setMode('edit'); setSelected(null); resetForm() }
-  const goEdit = (p) => { setMode('edit'); setSelected(p); setForm({ name:p.name||'', price:p.price||0, stock:p.stock||0, image:p.image||'', description:p.description||'', category:p.category||'' }) }
-  const goView = (p) => { setMode('view'); setSelected(p) }
-
-  const ensureCategoryExists = async (categoryName) => {
-    if (!categoryName?.trim()) return
-    if (categoryOptions.includes(categoryName)) return
-    try {
-      const created = await createCategory({ name: categoryName })
-      setCategoryOptions(prev => [...prev, created.name])
-    } catch(err){ /* noop: json-server creará si endpoint existe */ }
+  const goEdit = (p) => { 
+    setMode('edit'); 
+    setSelected(p); 
+    setForm({ 
+      name:p.name||'', 
+      price:p.price||0, 
+      stock:p.stock||0, 
+      image:p.image||'', 
+      description:p.description||'', 
+      category:p.category||'' 
+    }) 
   }
+  const goView = (p) => { setMode('view'); setSelected(p) }
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    // Validaciones simples
     const nextErrors = {}
     if (!form.name?.trim()) nextErrors.name = 'El nombre es obligatorio'
     if (form.price === '' || Number(form.price) <= 0) nextErrors.price = 'El precio debe ser mayor a 0'
@@ -59,7 +58,6 @@ export default function MyProducts(){
 
     try {
       setSaving(true)
-      await ensureCategoryExists(form.category)
       if (selected) await updateProduct(selected.id, form)
       else await createProduct(form)
       await reload()
@@ -98,8 +96,8 @@ export default function MyProducts(){
                 <tr key={r.id} style={{background: idx%2? 'var(--bg)':'var(--secondary)'}}>
                   <td>{r.id}</td>
                   <td>{r.name}</td>
-                  <td>{r.category || r.categoryId}</td>
-                  <td>{new Intl.NumberFormat('es-AR', { style:'currency', currency:'ARS', maximumFractionDigits:0 }).format(r.price)}</td>
+                  <td>{r.category}</td>
+                  <td>{r.price}</td>
                   <td>{r.stock}</td>
                   <td className="row">
                     <button className="btn btn-info" onClick={()=>goView(r)}>Ver</button>
@@ -119,9 +117,9 @@ export default function MyProducts(){
           <div>
             <h3>{selected.name}</h3>
             <p>{selected.description}</p>
-            <p><b>Precio:</b> {new Intl.NumberFormat('es-AR', { style:'currency', currency:'ARS', maximumFractionDigits:0 }).format(selected.price)}</p>
+            <p><b>Precio:</b> {selected.price}</p>
             <p><b>Stock:</b> {selected.stock}</p>
-            <p><b>Categoría:</b> {selected.category || selected.categoryId}</p>
+            <p><b>Categoría:</b> {selected.category}</p>
             <div className="row" style={{gap:8}}>
               <button className="btn btn-secondary" onClick={()=>goEdit(selected)}>Editar</button>
             </div>
@@ -160,20 +158,20 @@ export default function MyProducts(){
           </label>
 
           <label>
-            Categoría (texto)
-            <input placeholder="Ej: Teclados / Auriculares" list="category-suggestions" value={form.category} onChange={e=>setForm({...form, category:e.target.value})} />
+            Categoría
+            <select value={form.category} onChange={e=>setForm({...form, category:e.target.value})}>
+              <option value="">Seleccione categoría</option>
+              {categoryOptions.map(name => <option key={name} value={name}>{name}</option>)}
+            </select>
           </label>
           {errors.category && <small style={{color:'#d32f2f'}}>{errors.category}</small>}
-          <datalist id="category-suggestions">
-            {categoryOptions.map(name => <option key={name} value={name} />)}
-          </datalist>
 
           <div className="row" style={{gap:16, gridColumn:'1 / -1'}}>
-            <button disabled={saving} type="submit" className="btn btn-primary" style={{padding:'12px 16px', borderRadius:12}}>
+            <button disabled={saving} type="submit" className="btn btn-primary">
               {saving ? 'Guardando...' : (selected ? 'Guardar cambios' : 'Crear')}
             </button>
-            <button type="button" className="btn btn-secondary" style={{padding:'12px 16px', borderRadius:12}} onClick={goList}>Cancelar</button>
-            <button type="button" className="btn btn-outline" style={{padding:'12px 16px', borderRadius:12}} onClick={resetForm}>Limpiar</button>
+            <button type="button" className="btn btn-secondary" onClick={goList}>Cancelar</button>
+            <button type="button" className="btn btn-outline" onClick={resetForm}>Limpiar</button>
           </div>
         </form>
       )}
