@@ -5,7 +5,22 @@ body { margin: 0; background: #0b0b0b; color: #eee; }
 .card { background:#171717; border:1px solid #222; border-radius: 14px; padding: .75rem; }
 .footer { border-top:1px solid #222; padding:1rem; text-align:center; margin-top:2rem; color:#aaa; }
 a { color:#61dafb; text-decoration:none; }
-input, select, button { background:#111; color:#eee; border:1px solid #333; border-radius:10px; padding:.5rem .75rem; }
+input, select, button { 
+  background:#111; 
+  color:#eee; 
+  border:1px solid #333; 
+  border-radius:10px; 
+  padding:.5rem .75rem;
+  transition: transform 0.1s, background-color 0.2s;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:hover {
+  background-color: #222;
+}
 .row { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center }
 .navbar { display:flex; align-items:center; justify-content:space-between; padding: .75rem 1rem; border-bottom:1px solid #222; position:sticky; top:0; background:#0b0b0b; z-index:10}
 .badge { background:#222; padding:.2rem .45rem; border-radius:999px; font-size:.8rem }
@@ -94,4 +109,42 @@ input, select, button { background:#111; color:#eee; border:1px solid #333; bord
 .confirmation-actions {
   display: flex;
   justify-content: space-around;
+}
+
+.qty-button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qty-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.remove-button {
+  background-color: #331111;
+  border-color: #442222;
+  transition: all 0.2s;
+}
+
+.remove-button:hover {
+  background-color: #441111;
+}
+
+.clear-cart-button {
+  background-color: #331111;
+  border-color: #442222;
+}
+
+.checkout-button {
+  background-color: #113311;
+  border-color: #224422;
+}
+
+.checkout-button:hover {
+  background-color: #114411;
 }
