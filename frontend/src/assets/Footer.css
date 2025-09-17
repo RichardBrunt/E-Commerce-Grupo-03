@@ -1,0 +1,96 @@
+/* Footer inspirado en el header, moderno y cómodo visualmente */
+.ml-footer {
+  background: #E0E0E0;
+  color: #1A1A1A;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  border-top: 1.5px solid #CCCCCC;
+  margin-top: 2rem;
+}
+
+.ml-footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 2.5rem 4vw 1.5rem 4vw;
+  gap: 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.ml-footer-section {
+  min-width: 180px;
+  flex: 1 1 200px;
+}
+
+.ml-footer-logo {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.ml-footer-links ul,
+.ml-footer-contact ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ml-footer-links li,
+.ml-footer-contact li {
+  margin-bottom: 0.5rem;
+  font-size: 1.05rem;
+}
+
+.ml-footer-links a {
+  color: #1A1A1A;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ml-footer-links a:hover {
+  color: #333333;
+  text-decoration: underline;
+}
+
+.ml-footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ml-footer-social-icons {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+}
+.ml-footer-social-icons a {
+  color: #1A1A1A;
+  font-size: 1.5rem;
+  transition: color 0.2s, transform 0.2s;
+}
+.ml-footer-social-icons a:hover {
+  color: #333333;
+  transform: scale(1.15);
+}
+
+.ml-footer-bottom {
+  text-align: center;
+  padding: 1rem 0 0.5rem 0;
+  font-size: 1rem;
+  color: #333333;
+  background: #E0E0E0;
+  border-top: 1px solid #CCCCCC;
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .ml-footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem 1rem 1rem 1rem;
+  }
+  .ml-footer-section {
+    min-width: 0;
+  }
+}

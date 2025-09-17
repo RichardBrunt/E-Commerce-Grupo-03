@@ -1,25 +1,13 @@
 {
   "categories": [
-    {
-      "id": "1",
-      "name": "Notebooks"
-    },
-    {
-      "id": "2",
-      "name": "Auriculares"
-    },
-    {
-      "id": "3",
-      "name": "Monitores"
-    },
-    {
-      "id": "4",
-      "name": "Teclados"
-    }
+    { "id": 1, "name": "Notebooks" },
+    { "id": 2, "name": "Auriculares" },
+    { "id": 3, "name": "Monitores" },
+    { "id": 4, "name": "Teclados" }
   ],
+
   "products": [
     {
-
       "id": 1,
       "name": "Auriculares Z",
       "categoryId": 2,
@@ -32,7 +20,7 @@
         "/src/assets/IMG/auriculares/609_medium.jpg",
         "/src/assets/IMG/auriculares/2103301554572833_01_medium.jpg"
       ],
-      "description": "Sonido Hi‑Fi y micrófono.",
+      "description": "Sonido Hi-Fi y micrófono.",
       "specs": {
         "Chipset": "Qualcomm QCC3040",
         "Pantalla": "-",
@@ -57,7 +45,7 @@
       "categoryId": 3,
       "price": 459999,
       "stock": 3,
-  "image": "/src/assets/IMG/monitor/descarga.jpeg",
+      "image": "/src/assets/IMG/monitor/descarga.jpeg",
       "images": [
         "/src/assets/IMG/monitor/monitor-gaming-msi-mag-276cpxf-1.webp",
         "/src/assets/IMG/monitor/feature-01.png",
@@ -84,7 +72,7 @@
       }
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Notebook 14\"",
       "categoryId": 1,
       "price": 799999,
@@ -116,7 +104,7 @@
       }
     },
     {
-      "id": "4",
+      "id": 4,
       "name": "Teclado 60%",
       "categoryId": 4,
       "price": 89999,
@@ -148,17 +136,19 @@
       }
     }
   ],
+
   "users": [
     {
-      "id": "8518",
+      "id": 8518,
       "username": "juan24678",
-      "firstName": "juan",
-      "lastName": "garcia",
+      "firstName": "Juan",
+      "lastName": "Garcia",
       "email": "jpgarciamallorquin@gmail.com",
       "password": "123"
-
-      "id": "501f",
-      "username": "julianresumil@gmail.xn--ida",
+    },
+    {
+      "id": 5011,
+      "username": "julian",
       "firstName": "Julian",
       "lastName": "Resumil",
       "email": "julianresumil@gmail.com",

@@ -1,5 +1,7 @@
 import React from 'react'
-import { Navbar } from './components/Navbar.jsx'
+import Header from './components/Header.jsx'
+import Footer from './components/Footer.jsx'
+import AppleSection from './components/AppleSection.jsx'
 import { AppRouter } from './app/router.jsx'
 import { CartProvider } from './contexts/CartContext.jsx'
 import { AuthProvider } from './contexts/AuthContext.jsx'
@@ -9,11 +11,11 @@ export default function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <Navbar />
+  <Header />
         <main className="container">
-          <AppRouter />
+          <AppleSection />
         </main>
-        <footer className="footer">© 2025 UADE · TPO</footer>
+  <Footer />
       </CartProvider>
     </AuthProvider>
   )

@@ -1,0 +1,147 @@
+/* Paleta sugerida:
+   - Gris claro: #F5F5F5
+   - Gris medio: #E0E0E0
+   - Gris oscuro: #333333
+   - Negro absoluto: #000000
+   - Blanco puro: #FFFFFF
+   - Amarillo (acento, opcional): #FFD700
+*/
+
+.ml-header {
+  background: #F5F5F5;
+  color: #1A1A1A;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.ml-header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  background: #F5F5F5;
+}
+
+.ml-logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ml-logo {
+  height: 40px;
+  width: auto;
+  padding: 2px;
+}
+
+.ml-location {
+  font-size: 0.95rem;
+  color: #333333;
+}
+
+.ml-search-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 0 2rem;
+  max-width: 600px;
+}
+
+.ml-search-input {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: 1px solid #E0E0E0;
+  border-radius: 4px 0 0 4px;
+  font-size: 1rem;
+  background: #FFFFFF;
+  color: #1A1A1A;
+  outline: none;
+}
+
+.ml-search-btn {
+  background: #333333;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.ml-search-btn:hover {
+  background: #000000;
+}
+
+.ml-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.ml-free-shipping {
+  display: none; /* Oculto para un look más elegante y neutro */
+}
+
+.ml-user-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.ml-user-nav a {
+  color: #333333;
+  text-decoration: none;
+  font-size: 0.98rem;
+  transition: color 0.2s;
+}
+.ml-user-nav a:hover {
+  color: #000000;
+}
+.ml-cart-icon {
+  font-size: 1.3rem;
+  margin-left: 0.5rem;
+  color: #333333;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.ml-cart-icon:hover {
+  color: #000000;
+}
+
+.ml-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0.5rem 2rem;
+  background: #E0E0E0;
+  border-top: 1px solid #E0E0E0;
+}
+.ml-navbar-link {
+  color: #333333;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: color 0.2s, border-bottom 0.2s;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  padding: 2px;
+}
+.ml-navbar-link:hover {
+  color: #000000;
+  border-bottom: 2px solid #333333;
+  background: #F5F5F5;
+  border-radius: 4px;;
+  transition: background 0.2s, border-radius 0.2s, color 0.2s;
+}
+
+@media (max-width: 900px) {
+  .ml-header-top, .ml-navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+  .ml-search-section {
+    margin: 1rem 0;
+    width: 100%;
+    max-width: 100%;
+  }
+}
