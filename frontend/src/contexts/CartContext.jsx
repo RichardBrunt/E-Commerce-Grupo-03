@@ -1,16 +1,9 @@
+
 import React, { createContext, useContext, useMemo, useState, useEffect } from 'react'
 
 // Creamos el contexto para el carrito
 const CartCtx = createContext(null)
 // Hook personalizado para usar el contexto del carrito
-export const useCart = () => useContext(CartCtx)
-
-// Proveedor del contexto del carrito
-export function CartProvider({ children }){
-import React, { createContext, useContext, useMemo, useState, useEffect } from 'react'
-
-// Contexto del carrito
-const CartCtx = createContext(null)
 export const useCart = () => useContext(CartCtx)
 
 export function CartProvider({ children }) {
@@ -75,9 +68,4 @@ export function CartProvider({ children }) {
 }
 
 
-  return (
-    <CartCtx.Provider value={contextValue}>
-      {children}
-    </CartCtx.Provider>
-  );
-}
+

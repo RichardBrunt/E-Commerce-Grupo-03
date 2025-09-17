@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import bannerMacbook from "../assets/img/products/MacbookBannerBody.jpg";
 import MacbookPro from "../assets/img/products/MacbookPro.jpg";
@@ -32,10 +33,15 @@ const categories = [
 const AppleSection = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     listProducts().then(setProducts).finally(() => setLoading(false));
   }, []);
+
+  const handleComprarAhora = (id) => {
+    navigate(`/product/${id}`);
+  };
 
   return (
     <section className="apple-section">
@@ -75,6 +81,7 @@ const AppleSection = () => {
             <button
               className={`apple-btn ${prod.stock > 0 ? "apple-btn-primary" : "apple-btn-disabled"}`}
               disabled={prod.stock === 0}
+              onClick={() => prod.stock > 0 && handleComprarAhora(prod.id)}
             >
               {prod.stock > 0 ? "Comprar Ahora" : "Sin Stock"}
             </button>

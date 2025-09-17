@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { listProducts } from "@/services/api.js";
+import { getProduct } from "@/services/api.js";
 import { useCart } from "@/contexts/CartContext.jsx";
 import "../assets/base.css";
 import "../assets/ProductDetail.css";
@@ -36,8 +36,8 @@ export default function ProductDetail() {
 
   useEffect(() => {
     setLoading(true);
-    listProducts({ id })
-      .then(arr => setProduct(arr && arr[0] ? arr[0] : null))
+    getProduct(id)
+      .then(prod => setProduct(prod))
       .catch(() => setError('No se pudo cargar el producto'))
       .finally(() => setLoading(false));
   }, [id]);
