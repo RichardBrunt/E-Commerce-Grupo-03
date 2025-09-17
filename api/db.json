@@ -1,19 +1,19 @@
 {
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Notebooks"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Auriculares"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Monitores"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Teclados"
     }
   ],
@@ -83,7 +83,7 @@
       }
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Notebook 14\"",
       "categoryId": 1,
       "price": 799999,
@@ -115,7 +115,7 @@
       }
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Teclado 60%",
       "categoryId": 4,
       "price": 89999,
@@ -147,5 +147,14 @@
       }
     }
   ],
-  "users": []
+  "users": [
+    {
+      "id": "501f",
+      "username": "julianresumil@gmail.xn--ida",
+      "firstName": "Julian",
+      "lastName": "Resumil",
+      "email": "julianresumil@gmail.com",
+      "password": "15f96"
+    }
+  ]
 }
