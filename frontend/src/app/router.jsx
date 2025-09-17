@@ -9,6 +9,7 @@ import MyProducts from '@/pages/MyProducts.jsx'
 import NotFound from '@/pages/NotFound.jsx'
 import { useAuth } from '@/contexts/AuthContext.jsx'
 
+
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
   if (!user) return <Navigate to="/login" replace />

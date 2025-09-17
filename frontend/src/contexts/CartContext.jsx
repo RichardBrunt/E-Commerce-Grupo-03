@@ -7,84 +7,73 @@ export const useCart = () => useContext(CartCtx)
 
 // Proveedor del contexto del carrito
 export function CartProvider({ children }){
-  // Estado local del carrito usando useState, inicializado desde localStorage
+import React, { createContext, useContext, useMemo, useState, useEffect } from 'react'
+
+// Contexto del carrito
+const CartCtx = createContext(null)
+export const useCart = () => useContext(CartCtx)
+
+export function CartProvider({ children }) {
+  // Inicializa desde localStorage (sin dependencias externas)
   const [items, setItems] = useState(() => {
     try {
-      const storedCart = localStorage.getItem('cartItems');
-      return storedCart ? JSON.parse(storedCart) : [];
-    } catch (error) {
-      console.error('Error loading cart:', error);
-      return [];
+      const stored = localStorage.getItem('cartItems')
+      return stored ? JSON.parse(stored) : []
+    } catch (e) {
+      console.error('Error loading cart:', e)
+      return []
     }
-  });
+  })
 
-  // Efecto para persistir el carrito en localStorage cuando cambia
+  // Persiste en localStorage cuando cambia el carrito
   useEffect(() => {
     try {
-      localStorage.setItem('cartItems', JSON.stringify(items));
-    } catch (error) {
-      console.error('Error saving cart:', error);
+      localStorage.setItem('cartItems', JSON.stringify(items))
+    } catch (e) {
+      console.error('Error saving cart:', e)
     }
-  }, [items]); // Se ejecuta cuando items cambia
+  }, [items])
 
-  // Método para agregar un item al carrito
-  const addItem = (product) => {
-    setItems(prevItems => {
-      const existingItem = prevItems.find(item => item.id === product.id);
-      if (existingItem) {
-        // Si el item ya existe, actualiza la cantidad
-        return prevItems.map(item => 
-          item.id === product.id 
-            ? { ...item, qty: item.qty + 1 }
-            : item
-        );
+  // Agregar item (acepta cantidad opcional)
+  const addItem = (product, cantidad = 1) => {
+    setItems(prev => {
+      const found = prev.find(i => i.id === product.id)
+      if (found) {
+        return prev.map(i =>
+          i.id === product.id ? { ...i, qty: i.qty + cantidad } : i
+        )
       }
-      // Si el item no existe, añádelo con cantidad 1
-      return [...prevItems, { ...product, qty: 1 }];
-    });
-  };
+      return [...prev, { ...product, qty: cantidad }]
+    })
+  }
 
-  // Método para actualizar la cantidad de un item
+  // Actualizar cantidad (corrige el bug del id --)
   const updateQuantity = (id, newQty) => {
-    if (newQty < 1) return; // Validación de cantidad mínima
-    setItems(prevItems => 
-      prevItems.map(item =>
-        item.id === id 
-          ? { ...item, qty: newQty }
-          : item
+    if (newQty < 1) return
+    setItems(prev =>
+      prev.map(item =>
+        item.id === id ? { ...item, qty: newQty } : item
       )
-    );
-  };
+    )
+  }
 
-  // Método para eliminar un item del carrito
-  const removeItem = (id) => {
-    setItems(prevItems => prevItems.filter(item => item.id !== id));
-  };
+  // Eliminar y limpiar
+  const removeItem = (id) => setItems(prev => prev.filter(i => i.id !== id))
+  const clear = () => setItems([])
 
-  // Método para vaciar el carrito
-  const clear = () => setItems([]);
+  // Derivados memorizados
+  const itemsCount = useMemo(() => items.reduce((acc, i) => acc + i.qty, 0), [items])
+  const total = useMemo(() => items.reduce((acc, i) => acc + i.price * i.qty, 0), [items])
 
-  // Cálculos memorizados para evitar recálculos innecesarios
-  const itemsCount = useMemo(() => 
-    items.reduce((total, item) => total + item.qty, 0), 
-    [items]
-  );
+  const contextValue = { items, addItem, updateQuantity, removeItem, clear, itemsCount, total }
 
-  const total = useMemo(() => 
-    items.reduce((sum, item) => sum + (item.price * item.qty), 0), 
-    [items]
-  );
+  return (
+    <CartCtx.Provider value={contextValue}>
+      {children}
+    </CartCtx.Provider>
+  )
+}
 
-  // Valor del contexto que se proveerá a los componentes
-  const contextValue = {
-    items,          // Array de items en el carrito
-    addItem,        // Función para agregar items
-    updateQuantity, // Función para actualizar cantidad
-    removeItem,     // Función para eliminar items
-    clear,         // Función para vaciar el carrito
-    itemsCount,    // Número total de items
-    total          // Suma total del carrito
-  };
 
   return (
     <CartCtx.Provider value={contextValue}>
