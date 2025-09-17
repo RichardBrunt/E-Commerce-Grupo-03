@@ -22,32 +22,25 @@ body {
 .container { max-width: 1100px; margin: 1rem auto; padding: 0 1rem; }
 .grid { display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap: 1rem; }
 
-.card {
-  background: var(--secondary);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: .75rem;
+.card { background:#171717; border:1px solid #222; border-radius: 14px; padding: .75rem; }
+.footer { border-top:1px solid #222; padding:1rem; text-align:center; margin-top:2rem; color:#aaa; }
+a { color:#61dafb; text-decoration:none; }
+input, select, button { 
+  background:#111; 
+  color:#eee; 
+  border:1px solid #333; 
+  border-radius:10px; 
+  padding:.5rem .75rem;
+  transition: transform 0.1s, background-color 0.2s;
 }
 
-.footer {
-  border-top: 1px solid var(--border);
-  padding: 1rem;
-  text-align: center;
-  margin-top: 2rem;
-  color: var(--muted);
-  background: var(--secondary);
+button:active {
+  transform: scale(0.95);
 }
 
-a { color: var(--primary); text-decoration: none; }
-
-input, select, button {
-  background: var(--secondary);
-  color: var(--text);
-  border: 1px solid rgba(51,51,51,.25);
-  border-radius: 10px;
-  padding: .5rem .75rem;
+button:hover {
+  background-color: #222;
 }
-input:focus, select:focus, button:focus { outline: none; border-color: var(--hover); }
 
 .row { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center }
 
@@ -59,6 +52,7 @@ input:focus, select:focus, button:focus { outline: none; border-color: var(--hov
 
 .badge { background: var(--accent); color: var(--primary); padding:.2rem .45rem; border-radius:999px; font-size:.8rem }
 .img { width:100%; height:160px; object-fit:cover; border-radius:10px }
+
 
 /* Botones genéricos (coinciden con las clases usadas en los componentes) */
 .btn { cursor:pointer; padding:.5rem .75rem; border-radius:10px; border:1px solid var(--primary); }
@@ -75,3 +69,241 @@ input:focus, select:focus, button:focus { outline: none; border-color: var(--hov
 table { width:100%; border-collapse:separate; border-spacing:0; color: var(--text); }
 thead tr { background: var(--bg); color: var(--text); }
 th, td { text-align:left; padding:12px; }
+
+/* Estilos para la página del Carrito */
+.cart-container {
+  background-color: #1c1c1c;
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cart-item {
+  background-color: #222;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #333;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.qty-button {
+  width: 30px;
+  height: 30px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.qty-button:hover:not(:disabled) {
+  background-color: #444;
+  transform: scale(1.05);
+}
+
+.qty-button:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.qty-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.item-quantity {
+  font-size: 1.1rem;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.remove-button {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  background-color: #3d1f1f;
+  border-color: #4d2f2f;
+  transition: all 0.2s ease;
+}
+
+.remove-button:hover {
+  background-color: #4d2f2f;
+  transform: scale(1.05);
+}
+
+.remove-button:active {
+  transform: scale(0.95);
+}
+
+.cart-summary {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #222;
+  border-radius: 8px;
+  border: 1px solid #333;
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.clear-cart-button {
+  background-color: #3d1f1f;
+  border-color: #4d2f2f;
+  transition: all 0.2s ease;
+}
+
+.clear-cart-button:hover {
+  background-color: #4d2f2f;
+  transform: scale(1.05);
+}
+
+.checkout-button {
+  background-color: #1f3d1f;
+  border-color: #2f4d2f;
+  transition: all 0.2s ease;
+}
+
+.checkout-button:hover {
+  background-color: #2f4d2f;
+  transform: scale(1.05);
+}
+
+.checkout-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  background-color: #1c1c1c;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.checkout-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.form-group input {
+  padding: 0.75rem;
+  border-radius: 6px;
+  background-color: #333;
+  border: 1px solid #444;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #666;
+  background-color: #3a3a3a;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.final-confirmation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1c1c1c;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  z-index: 1001;
+}
+
+.confirmation-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.confirmation-actions {
+  display: flex;
+  justify-content: space-around;
+}
+
+.qty-button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qty-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.remove-button {
+  background-color: #331111;
+  border-color: #442222;
+  transition: all 0.2s;
+}
+
+.remove-button:hover {
+  background-color: #441111;
+}
+
+.clear-cart-button {
+  background-color: #331111;
+  border-color: #442222;
+}
+
+.checkout-button {
+  background-color: #113311;
+  border-color: #224422;
+}
+
+.checkout-button:hover {
+  background-color: #114411;
+}
