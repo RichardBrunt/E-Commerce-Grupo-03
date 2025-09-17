@@ -1,0 +1,93 @@
+/* estilos.css */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.producto {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+.titulo {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.imagen-principal {
+  display: block;
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.info-compra {
+  text-align: right;
+  margin-bottom: 30px;
+}
+
+.precio {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stock {
+  color: green;
+  margin: 5px 0;
+}
+
+.boton-carrito {
+  background-color: #007aff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton-carrito:hover {
+  background-color: #005bb5;
+}
+
+.especificaciones, .caracteristicas, .galeria {
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+.miniaturas {
+  display: flex;
+  gap: 10px;
+}
+
+.miniaturas img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.miniaturas img:hover {
+  transform: scale(1.05);
+}

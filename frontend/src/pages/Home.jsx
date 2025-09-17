@@ -6,25 +6,48 @@ import CategoryFilter from '@/components/CategoryFilter.jsx'
 export default function Home(){
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]) // Este estado guardará TODOS los productos
   const [categories, setCategories] = useState([])
   const [q, setQ] = useState('')
   const [categoryId, setCategoryId] = useState('')
   const [order, setOrder] = useState('asc')
 
   useEffect(() => {
+    // Solo se llama a la API UNA vez para obtener todos los productos y categorías
     const fetchData = async () => {
       try {
         const [cats, prods] = await Promise.all([
           listCategories(),
-          listProducts({ _sort:'name', _order:order, name_like:q || undefined, categoryId: categoryId || undefined })
+          listProducts() // Ya no se pasan parámetros de búsqueda a la API
         ])
-        setCategories(cats); setProducts(prods)
-      } catch (e){ setError('No se pudieron cargar datos') }
-      finally { setLoading(false) }
+        setCategories(cats);
+        setProducts(prods);
+      } catch (e){
+        setError('No se pudieron cargar datos');
+      } finally {
+        setLoading(false);
+      }
     }
-    fetchData()
-  }, [q, categoryId, order])
+    fetchData();
+  }, []) // El array de dependencias vacío hace que se ejecute solo al montar el componente.
+
+  // Se crea una lista de productos filtrados y ordenados en el frontend
+  const filteredAndSortedProducts = products
+    .filter(p => {
+      // 1. Filtra por nombre (buscador)
+      const matchesSearch = p.name.toLowerCase().includes(q.toLowerCase());
+      // 2. Filtra por categoría
+      const matchesCategory = categoryId ? p.categoryId === parseInt(categoryId) : true;
+      return matchesSearch && matchesCategory;
+    })
+    .sort((a, b) => {
+      // 3. Ordena por nombre (ascendente/descendente)
+      if (order === 'asc') {
+        return a.name.localeCompare(b.name);
+      } else {
+        return b.name.localeCompare(a.name);
+      }
+    });
 
   if (loading) return <p>Cargando...</p>
   if (error) return <p>{error}</p>
@@ -39,9 +62,9 @@ export default function Home(){
           <option value="desc">Z → A</option>
         </select>
       </header>
-      {products.length === 0 ? <p>Sin resultados</p> : (
+      {filteredAndSortedProducts.length === 0 ? <p>Sin resultados</p> : (
         <div className="grid">
-          {products.map(p => <ProductCard key={p.id} product={p} />)}
+          {filteredAndSortedProducts.map(p => <ProductCard key={p.id} product={p} />)}
         </div>
       )}
     </section>
