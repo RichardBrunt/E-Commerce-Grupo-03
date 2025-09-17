@@ -1,0 +1,157 @@
+Contenidos Clase 02:
+======================
+
+Github Copilot + Agente IA: 
+==========================
+Editor de código abierto y gratuito, <> cursos windsurf
+Desarrollar, explicarlo, testearlo.
+Programador Piloto -> IA Copiloto 
+Instalar VSC, Github Copilot + cuenta en github 
+Crear cuenta en github
+
+Autocompletado
+Chat inline Ctrl+i en editor + terminal 
+Chat Ctrl+Alt+i 
+Comandos /
+Extensiones @
+Contexto #, 
+¿Puedes optimizar la eficiencia de este código? #L6-L10
+
+
+Ask, editar, leer chat y ver cambios
+Agente 
+	proactivo, 
+	asistente autónomo, 
+	itera sobre sus respuestas
+	contexto
+	interactua con la terminal 
+
+	imita la pagina de busqueda de google diseño y funcionalidad y levantala con liveserver
+
+Instrucciones
+
+¿Que ocurre cuando solicitamos una página web? por ejemplo de google
+1. El usuario introduce la URL en el navegador
+2. Resolución DNS (Domaster Name System): traducción de nombre domininio a ip, nslookup, ping
+3. Establecimiento de la conexión (TCP/IP)
+4. Solicitud HTTP (Request)
+GET / HTTP/1.1
+Host: www.google.com
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+5.El servidor recibe la solicitud y la procesa:
+6. Respuesta HTTP (Response)
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+Content-Length: 1234
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google</title>
+</head>
+<body>
+    <h1>Bienvenido a Google</h1>
+</body>
+</html>
+
+Código de estado HTTP: 200 OK (indica que la solicitud fue exitosa).
+Cabeceras (headers): Información adicional, como el tipo de contenido (text/html).
+Cuerpo (body): El contenido de la página web (en este caso, el HTML).
+
+7. Renderizado de la página en el navegador
+El navegador recibe la respuesta y comienza a renderizar la página:
+Procesa el HTML: 
+Descarga recursos adicionales: Si el HTML incluye enlaces a archivos CSS, JavaScript, imágenes, etc., el navegador realiza solicitudes adicionales para obtener estos recursos.
+Aplica estilos CSS: El navegador procesa los archivos CSS y aplica los estilos al DOM.
+Ejecuta JavaScript: Si hay scripts, el navegador los ejecuta
+Renderiza la página: Finalmente, el navegador muestra la página completa en la pantalla.
+8. Interacción del usuario
+Una vez que la página está cargada, el usuario puede interactuar con ella (hacer clic en enlaces, enviar formularios, etc.).
+
+
+JavaScript: 
+===========
+Objetivo de la Clase  
+Introducir los conceptos fundamentales de JavaScript para desarrollo web, enfocándose en su uso en el navegador, manipulación del DOM, eventos, asincronía y consumo de APIs.  
+
+
+1. Introducción a JavaScript en el Navegador (30 min)  
+- ¿Para que sirve JavaScript?  img/js/HTML-CSS-JS.png
+    Agrega comportamiento dinámico e interactividad a una página web, mientras que HTML y CSS se encargan de la estructura y el diseño estático.
+    Ejemplos: holaJs.html
+        HTML/CSS: Solo definen estructura y estilos estáticos, JS: Permite añadir, eliminar o cambiar elementos HTML, alterar estilos CSS dinámicamente.
+        HTML/CSS: No pueden realizar cálculos, validaciones o tomar decisiones. JS: Ejecuta lógica compleja, Validar formularios antes de enviarlos, Filtrar o ordenar listas.
+        HTML/CSS: Solo pueden manejar pseudo-clases básicas como :hover. JavaScript: Responde a eventos complejos, Clicks, teclas presionadas, movimientos del mouse, cuanto tiempo veo un video
+        HTML/CSS: Solo muestran datos (requieren recargar la página para actualizarlos). JavaScript: Puede consumir APIs y actualizar la página sin recargar.
+
+
+- Inclusión de JS en HTML  img/js/Script-InlineVsExterno.png
+  - Etiqueta `<script>` (inline vs externo).  ver imagen 
+   
+
+- Herramientas básicas  
+  - Consola del navegador (Chrome DevTools).  
+  - debuggin con VSC: ejemplo con holaJs.html
+    Icono de Debug Ctrl+Shift+D
+    Create a launch.json file
+    Web Browser Chrome
+    Configuración de launch.json, colocer url de archivo html levantado con liveserver
+    Poner breakpoint en js
+
+- Variables y Tipos de Datos: varVsLet.js
+    - `var`, obsoleta hoisting, ver imagen
+    - `let`, `const`. 
+      let y const sí tienen hoisting, pero no pueden ser usadas antes de su línea de declaración.
+    - Tipos de Datos: Números, cadenas, booleanos, `null`, `undefined`.
+    - array y objetos
+
+- Estructuras de Control: estructuraControl.js
+    - Condicionales: `if`, `else if`, `else`, `switch`.
+    - Bucles: `for`, `while`, `do...while`.
+
+- Funciones: funciones.js
+    - Declaración y llamada de funciones.
+    - Parámetros y valores de retorno.
+    - Funciones anónimas y funciones de flecha.
+
+- Métodos de Array metodosArrays.js
+
+
+2. Manipulación del DOM (1 hora)  
+- ¿Qué es el DOM?  
+  El DOM (Document Object Model) es una representación en forma de árbol de los elementos de una página web. Cada etiqueta HTML es un nodo que puede ser accedido y modificado con JavaScript.
+
+- Selección de elementos  holaDOM.html
+  - `getElementById`, `querySelector`, `querySelectorAll`.  
+
+- Modificación del DOM  
+  - `innerHTML`, `textContent`, `createElement`, `appendChild`.  
+ 
+
+3. Eventos y Formularios (1 hora)   eventos.html
+  Los eventos son acciones o sucesos que ocurren en el navegador 
+    Ejemplos de eventos HTML:
+    Cuando un usuario hace clic con el mouse
+    Cuando se ha cargado una página web
+    Cuando se ha cargado una imagen
+    Cuando el mouse se mueve sobre un elemento
+    Cuando se cambia un campo de entrada
+    Cuando se envía un formulario HTML
+    Cuando un usuario pulsa una tecla
+
+  - Manejo de eventos  
+    - inline
+    - propiedades del dom 
+    - `addEventListener`: recomendado
+      Puedes agregar varias funciones para el mismo evento en un elemento:
+
+    
+
+  
+
+
+
+
+
+  

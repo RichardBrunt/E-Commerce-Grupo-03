@@ -1,25 +1,26 @@
 {
   "name": "frontend",
-  "private": true,
-  "version": "0.0.1",
-  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "vite.config.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "lint": "eslint . --ext .jsx,.js"
+    "api": "json-server --watch ../api/db.json --port 3000",
+    "dev:all": "npm-run-all -p api dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.2",
+    "json-server": "^1.0.0-beta.3",
+    "npm-run-all": "^4.1.5",
+    "vite": "^7.1.5"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.2",
-    "axios": "^1.7.5"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^4.3.1",
-    "eslint": "^9.9.0",
-    "eslint-plugin-react": "^7.35.0",
-    "prettier": "^3.3.3",
-    "vite": "^5.4.2"
+    "axios": "^1.11.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.8.2"
   }
 }
