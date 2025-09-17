@@ -20,7 +20,7 @@ export const Navbar = () => {
     <nav className="navbar">
       <Link to="/">UADE Shop</Link>
       <div className="row">
-        <Link to="/my-products">Mis publicaciones</Link>
+        <Link to="/gestion-stock">Gestión de Stock</Link>
         <Link to="/cart">Carrito <span className="badge">{itemsCount}</span></Link>
         {/* Renderizado condicional: si no hay usuario muestra Login, si hay usuario muestra Cerrar sesión */}
         {!user && <Link to="/login">Login</Link>}

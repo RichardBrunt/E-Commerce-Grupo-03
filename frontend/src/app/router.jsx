@@ -26,12 +26,20 @@ export const AppRouter = () => (
     <Route path="/cart" element={<Cart />} />
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
+
     {/* Rutas protegidas: solo para usuarios logueados */}
-    <Route path="/my-products" element={
-      <ProtectedRoute>
-        <MyProducts />
-      </ProtectedRoute>
-    } />
+    <Route
+      path="/my-products"
+      element={
+        <ProtectedRoute>
+          <MyProducts />
+        </ProtectedRoute>
+      }
+    />
+
+    {/* Redirección de rutas antiguas (compat) */}
+    <Route path="/mercaderia/*" element={<Navigate to="/my-products" replace />} />
+
     <Route path="*" element={<NotFound />} />
   </Routes>
 )

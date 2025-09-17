@@ -19,6 +19,7 @@
   ],
   "products": [
     {
+
       "id": 1,
       "name": "Auriculares Z",
       "categoryId": 2,
@@ -149,6 +150,13 @@
   ],
   "users": [
     {
+      "id": "8518",
+      "username": "juan24678",
+      "firstName": "juan",
+      "lastName": "garcia",
+      "email": "jpgarciamallorquin@gmail.com",
+      "password": "123"
+
       "id": "501f",
       "username": "julianresumil@gmail.xn--ida",
       "firstName": "Julian",
