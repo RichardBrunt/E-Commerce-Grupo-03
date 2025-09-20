@@ -156,12 +156,11 @@
 
 /* Cards de productos */
 .apple-products-grid {
-  display: flex;
-  gap: 2.5rem;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 100%;
   width: 100%;
 }
 .apple-card {
@@ -169,10 +168,8 @@
   border: 2px solid #E0E0E0;
   border-radius: 1.5rem;
   box-shadow: 0 2px 12px #0001;
-  padding: 2rem 1.5rem 1.5rem 1.5rem;
-  min-width: 270px;
-  max-width: 300px;
-  flex: 1 1 270px;
+  padding: 1.5rem 1.25rem 1.25rem 1.25rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -201,4 +198,50 @@
   .apple-banner-img { width: 100vw; min-width: 0; max-height: 220px; }
   .apple-banner-content { padding: 1.5rem; align-items: center; text-align: center; }
   .apple-products-grid { flex-direction: column; align-items: center; gap: 2rem; width: 100vw; max-width: 100vw; }
+}
+
+/* Layout con sidebar izquierda para ordenación */
+.apple-content {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1.5rem;
+  max-width: 1400px;
+  padding: 0 1rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.apple-sort-sidebar {
+  background: #fff;
+  border: 1px solid #E0E0E0;
+  border-radius: 1rem;
+  padding: .8rem;
+  height: fit-content;
+  position: sticky;
+  top: 12px;
+}
+
+.apple-sort-group { display: grid; gap: .4rem; margin-bottom: .8rem; }
+.apple-sort-label { font-size: .95rem; font-weight: 700; color: #1A1A1A; }
+.apple-sort-select {
+  border: 1px solid #E0E0E0;
+  border-radius: .75rem;
+  padding: .5rem .6rem;
+  font-size: .95rem;
+  background: #fafafa;
+  color: #000; /* seleccionado en negro */
+}
+
+/* Responsive: sidebar arriba */
+@media (max-width: 1024px) {
+  .apple-content { grid-template-columns: 1fr; }
+  .apple-sort-sidebar { position: static; }
+}
+
+/* Ajustes de columnas de cards según viewport */
+@media (max-width: 1280px) {
+  .apple-products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .apple-products-grid { grid-template-columns: 1fr; }
 }

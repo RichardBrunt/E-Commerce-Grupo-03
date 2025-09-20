@@ -1,14 +1,25 @@
 {
   "categories": [
-    { "id": 1, "name": "Notebooks" },
-    { "id": 2, "name": "Smartphones" },
-    { "id": 3, "name": "Monitores" },
-    { "id": 4, "name": "Teclados" }
+    {
+      "id": "1",
+      "name": "Notebooks"
+    },
+    {
+      "id": "2",
+      "name": "Smartphones"
+    },
+    {
+      "id": "3",
+      "name": "Monitores"
+    },
+    {
+      "id": "4",
+      "name": "Teclados"
+    }
   ],
-
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "iPhone Air",
       "categoryId": 2,
       "price": 19999,
@@ -40,7 +51,7 @@
       }
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Monitor 27\" QHD",
       "categoryId": 3,
       "price": 459999,
@@ -72,7 +83,7 @@
       }
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "MacBook Pro 14\"",
       "categoryId": 1,
       "price": 799999,
@@ -104,7 +115,7 @@
       }
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "MacBook Pro 16\"",
       "categoryId": 1,
       "price": 1199999,
@@ -136,23 +147,14 @@
       }
     }
   ],
-
   "users": [
     {
-      "id": 8518,
-      "username": "juan24678",
-      "firstName": "Juan",
-      "lastName": "Garcia",
-      "email": "jpgarciamallorquin@gmail.com",
-      "password": "123"
-    },
-    {
-      "id": 5011,
-      "username": "julian",
-      "firstName": "Julian",
-      "lastName": "Resumil",
-      "email": "julianresumil@gmail.com",
-      "password": "15f96"
+      "id": "0080",
+      "usuario": "Richard",
+      "nombre": "Richard",
+      "apellido": "Brunt",
+      "email": "brunt300@gmail.com",
+      "password": "123456"
     }
   ]
 }

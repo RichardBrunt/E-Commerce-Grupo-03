@@ -61,24 +61,30 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Controles de ordenación: debajo del scrollbar, encima de la grilla */}
-      <div className="apple-sort-toolbar" style={{ display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'flex-end', marginBottom: 16, paddingInline: 12 }}>
-        <label htmlFor="sortby-select" style={{ fontSize: 14 }}>Ordenar por:</label>
-        <select id="sortby-select" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
-          <option value="name">Nombre</option>
-          <option value="price">Precio</option>
-        </select>
-        <label htmlFor="order-select" style={{ fontSize: 14 }}>Dirección:</label>
-        <select id="order-select" value={order} onChange={(e) => setOrder(e.target.value)}>
-          <option value="asc">A-Z / Menor</option>
-          <option value="desc">Z-A / Mayor</option>
-        </select>
-      </div>
+      {/* Contenido con sidebar izquierda para ordenación y grilla a la derecha */}
+      <div className="apple-content">
+        <aside className="apple-sort-sidebar" aria-label="Opciones de orden">
+          <div className="apple-sort-group">
+            <label htmlFor="sortby-select" className="apple-sort-label">Ordenar por:</label>
+            <select id="sortby-select" value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="apple-sort-select">
+              <option value="name">Nombre</option>
+              <option value="price">Precio</option>
+            </select>
+          </div>
+          <div className="apple-sort-group">
+            <label htmlFor="order-select" className="apple-sort-label">Dirección:</label>
+            <select id="order-select" value={order} onChange={(e) => setOrder(e.target.value)} className="apple-sort-select">
+              <option value="asc">A-Z / Menor</option>
+              <option value="desc">Z-A / Mayor</option>
+            </select>
+          </div>
+        </aside>
 
-      <div className="apple-products-grid">
-        {loading ? <p>Cargando productos...</p> : products.map((prod) => (
-          <ProductCard key={prod.id} product={prod} />
-        ))}
+        <div className="apple-products-grid">
+          {loading ? <p>Cargando productos...</p> : products.map((prod) => (
+            <ProductCard key={prod.id} product={prod} />
+          ))}
+        </div>
       </div>
     </section>
   )
