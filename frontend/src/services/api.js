@@ -22,3 +22,4 @@ export const loginUser = async ({ email, password }) => {
   const users = await api.get('/users', { params: { email, password }}).then(r => r.data)
   return users[0] || null
 }
+export const findUsersByEmail = async (email) => api.get('/users', { params: { email } }).then(r => r.data)

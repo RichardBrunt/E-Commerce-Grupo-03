@@ -71,10 +71,21 @@ export default function MyProducts(){
   if (error) return <p>{error}</p>
 
   return (
-    <section className="card" style={{ padding:24 }}>
+    <section style={{ padding:24, background:'#ffffff', color:'#111', border:'1px solid #e5e5e5', borderRadius:16 }}>
       <div className="row" style={{justifyContent:'space-between', alignItems:'center'}}>
-        <h2>Gestión de Stock</h2>
-        {mode === 'list' && <button className="btn btn-primary" onClick={goNew}>Agregar nuevo</button>}
+        <div>
+          <h2 style={{margin:0}}>Gestión de Stock</h2>
+          <small style={{color:'#aaa'}}>Alta, edición y baja de productos y stock</small>
+        </div>
+        {mode === 'list' && (
+          <button
+            className="btn btn-primary"
+            onClick={goNew}
+            style={{ background:'#000', color:'#fff', border:'1px solid #333' }}
+          >
+            Agregar nuevo
+          </button>
+        )}
         {mode !== 'list' && <button className="btn btn-secondary" onClick={goList}>Volver al listado</button>}
       </div>
 
@@ -82,7 +93,7 @@ export default function MyProducts(){
         <div style={{overflowX:'auto'}}>
           <table>
             <thead>
-              <tr>
+              <tr style={{ background:'#f5f5f5' }}>
                 <th>ID</th>
                 <th>Nombre</th>
                 <th>Categoría</th>
@@ -93,7 +104,7 @@ export default function MyProducts(){
             </thead>
             <tbody>
               {products.map((r, idx) => (
-                <tr key={r.id} style={{background: idx%2? 'var(--bg)':'var(--secondary)'}}>
+                <tr key={r.id} style={{ background: idx % 2 ? '#fafafa' : '#ffffff' }}>
                   <td>{r.id}</td>
                   <td>{r.name}</td>
                   <td>{r.category}</td>
@@ -167,7 +178,7 @@ export default function MyProducts(){
           {errors.category && <small style={{color:'#d32f2f'}}>{errors.category}</small>}
 
           <div className="row" style={{gap:16, gridColumn:'1 / -1'}}>
-            <button disabled={saving} type="submit" className="btn btn-primary">
+            <button disabled={saving} type="submit" className="btn btn-primary" style={{ background:'#000', color:'#fff', border:'1px solid #333' }}>
               {saving ? 'Guardando...' : (selected ? 'Guardar cambios' : 'Crear')}
             </button>
             <button type="button" className="btn btn-secondary" onClick={goList}>Cancelar</button>

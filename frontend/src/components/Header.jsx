@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import "../assets/Header.css";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { useFilters } from "@/contexts/FiltersContext.jsx";
+import { useAuth } from "@/contexts/AuthContext.jsx";
 
 const Header = () => {
   const { q, setQ } = useFilters()
+  const { user, logout } = useAuth()
   return (
     <header className="ml-header">
       <div className="ml-header-top">
@@ -36,9 +38,28 @@ const Header = () => {
         <div className="ml-header-actions">
           <button className="ml-free-shipping">ENVÍO GRATIS</button>
           <nav className="ml-user-nav">
-            <Link to="/register">Creá tu cuenta</Link>
-            <Link to="/login">Ingresá</Link>
-            <Link to="/my-products">Mis compras</Link>
+            {!user && (
+              <>
+                <Link to="/register">Creá tu cuenta</Link>
+                <Link to="/login">Ingresá</Link>
+              </>
+            )}
+            {user && (
+              <>
+                <Link to="/gestion-stock">Gestión de stock</Link>
+                <span style={{ display:'inline-flex', alignItems:'center', gap:8, marginLeft: 8 }}>
+                  <img
+                    src={`https://ui-avatars.com/api/?name=${encodeURIComponent((user.nombre||'') + ' ' + (user.apellido||'')) || encodeURIComponent(user.usuario||user.email)}&background=000&color=fff&rounded=true&size=64`}
+                    alt="Avatar"
+                    width={28}
+                    height={28}
+                    style={{ borderRadius: '50%', border:'1px solid #333' }}
+                  />
+                  <span className="badge" style={{ margin: 0 }}>Hola, {user.usuario || user.firstName || user.email}</span>
+                </span>
+                <button onClick={logout} className="btn btn-outline" style={{ marginLeft: 8 }}>Cerrar sesión</button>
+              </>
+            )}
             <Link to="/cart" aria-label="Carrito"><FaShoppingCart className="ml-cart-icon" /></Link>
           </nav>
         </div>
