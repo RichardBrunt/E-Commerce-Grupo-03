@@ -1,4 +1,4 @@
-/* AppleSection.css - Inspirado en el estilo Apple y las cards adjuntas */
+/* Home.css - Antes AppleSection.css. Inspirado en el estilo Apple y las cards adjuntas */
 
 .apple-section {
   background: #F5F5F5;
@@ -101,30 +101,22 @@
   margin: 0 0 0.5rem 0;
 }
 
-.apple-banner-price-row {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.apple-banner-price {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #000;
-}
+.apple-banner-price-row { display: flex; align-items: center; gap: 1.5rem; }
+.apple-banner-price { font-size: 2rem; font-weight: 700; color: #000; }
 
 /* Scrollbar de categorías */
 .apple-categories-scroll {
   display: flex;
   gap: 1.2rem;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
   padding: 1.2rem 0 2rem 0;
   margin: 0 0 1.5rem 0;
   scrollbar-width: thin;
   justify-content: center;
   width: 100vw;
 }
-
 .apple-category-btn {
   background: #fff;
   color: #1A1A1A;
@@ -137,12 +129,30 @@
   transition: background 0.2s, color 0.2s, border 0.2s;
   outline: none;
   white-space: nowrap;
+  scroll-snap-align: start;
+  user-select: none;
 }
 .apple-category-btn:hover, .apple-category-btn:focus {
   background: #E0E0E0;
   color: #000;
   border: 1.5px solid #BDBDBD;
 }
+.apple-category-btn[aria-current="true"] {
+  background: #000;
+  color: #fff;
+  border-color: #FFD700;
+  box-shadow: 0 2px 10px #0002;
+}
+.apple-category-btn[aria-current="true"]:hover,
+.apple-category-btn[aria-current="true"]:focus {
+  background: #000;
+  color: #fff;
+  border-color: #FFD700;
+}
+.apple-categories-scroll::-webkit-scrollbar { height: 8px; }
+.apple-categories-scroll::-webkit-scrollbar-track { background: transparent; }
+.apple-categories-scroll::-webkit-scrollbar-thumb { background: #E0E0E0; border-radius: 8px; }
+.apple-categories-scroll::-webkit-scrollbar-thumb:hover { background: #BDBDBD; }
 
 /* Cards de productos */
 .apple-products-grid {
@@ -154,7 +164,6 @@
   max-width: 1200px;
   width: 100%;
 }
-
 .apple-card {
   background: #fff;
   border: 2px solid #E0E0E0;
@@ -171,103 +180,25 @@
   margin-bottom: 1.5rem;
   transition: box-shadow 0.2s, border 0.2s;
 }
-.apple-card:hover {
-  box-shadow: 0 6px 24px #0002;
-  border: 2px solid #FFD700;
-}
-
+.apple-card:hover { box-shadow: 0 6px 24px #0002; border: 2px solid #FFD700; }
 .apple-card-offer {
-  position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
-  background: #FFD700;
-  color: #1A1A1A;
-  font-weight: 700;
-  font-size: 1rem;
-  border-radius: 0.7rem;
-  padding: 0.4rem 1.1rem;
-  z-index: 2;
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  background: #FFD700; color: #1A1A1A; font-weight: 700; font-size: 1rem;
+  border-radius: 0.7rem; padding: 0.4rem 1.1rem; z-index: 2;
 }
-
-.apple-card-img {
-  width: 140px;
-  height: 140px;
-  object-fit: contain;
-  margin-bottom: 1.2rem;
-}
-
-.apple-card-title {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0 0 0.5rem 0;
-  color: #1A1A1A;
-  text-align: center;
-}
-
-.apple-card-price-row {
-  margin-bottom: 1.2rem;
-}
-
-.apple-card-price {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: #000;
-}
-
-/* Botones reutilizables */
-.apple-btn {
-  border: none;
-  border-radius: 1.2rem;
-  font-size: 1.08rem;
-  font-weight: 600;
-  padding: 0.8rem 2.2rem;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s, opacity 0.2s;
-  margin-top: 0.2rem;
-}
-.apple-btn-primary {
-  background: #000;
-  color: #fff;
-}
-.apple-btn-primary:hover {
-  background: #FFD700;
-  color: #1A1A1A;
-}
-.apple-btn-disabled {
-  background: #E0E0E0;
-  color: #888;
-  cursor: not-allowed;
-  opacity: 0.7;
-}
+.apple-card-img { width: 140px; height: 140px; object-fit: contain; margin-bottom: 1.2rem; }
+.apple-card-title { font-size: 1.25rem; font-weight: 700; margin: 0 0 0.5rem 0; color: #1A1A1A; text-align: center; }
+.apple-card-price-row { margin-bottom: 1.2rem; }
+.apple-card-price { font-size: 1.15rem; font-weight: 600; color: #000; }
+.apple-btn { border: none; border-radius: 1.2rem; font-size: 1.08rem; font-weight: 600; padding: 0.8rem 2.2rem; cursor: pointer; transition: background 0.2s, color 0.2s, opacity 0.2s; margin-top: 0.2rem; }
+.apple-btn-primary { background: #000; color: #fff; }
+.apple-btn-primary:hover { background: #FFD700; color: #1A1A1A; }
+.apple-btn-disabled { background: #E0E0E0; color: #888; cursor: not-allowed; opacity: 0.7; }
 
 @media (max-width: 900px) {
-  .apple-section {
-    width: 100vw;
-    max-width: 100vw;
-    padding: 0;
-  }
-  .apple-banner {
-    flex-direction: column;
-    min-height: 220px;
-    width: 100vw;
-    max-width: 100vw;
-    border-radius: 0;
-  }
-  .apple-banner-img {
-    width: 100vw;
-    min-width: 0;
-    max-height: 220px;
-  }
-  .apple-banner-content {
-    padding: 1.5rem;
-    align-items: center;
-    text-align: center;
-  }
-  .apple-products-grid {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    width: 100vw;
-    max-width: 100vw;
-  }
+  .apple-section { width: 100vw; max-width: 100vw; padding: 0; }
+  .apple-banner { flex-direction: column; min-height: 220px; width: 100vw; max-width: 100vw; border-radius: 0; }
+  .apple-banner-img { width: 100vw; min-width: 0; max-height: 220px; }
+  .apple-banner-content { padding: 1.5rem; align-items: center; text-align: center; }
+  .apple-products-grid { flex-direction: column; align-items: center; gap: 2rem; width: 100vw; max-width: 100vw; }
 }

@@ -3,7 +3,11 @@ const api = axios.create({ baseURL: 'http://localhost:3000' })
 
 // Products
 export const listProducts = (params={}) => api.get('/products', { params }).then(r => r.data)
-export const getProduct = (id) => api.get(`/products/${id}`).then(r => r.data)
+// Compatibilidad con json-server actual: usar query param ?id=
+export const getProduct = async (id) => {
+  const data = await api.get('/products', { params: { id } }).then(r => r.data)
+  return Array.isArray(data) ? data[0] || null : data || null
+}
 export const createProduct = (data) => api.post('/products', data).then(r => r.data)
 export const updateProduct = (id, data) => api.patch(`/products/${id}`, data).then(r => r.data)
 export const deleteProduct = (id) => api.delete(`/products/${id}`)

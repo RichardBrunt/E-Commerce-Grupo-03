@@ -45,9 +45,19 @@ export default function ProductDetail() {
   if (loading) return <div className="producto"><p>Cargando...</p></div>;
   if (error || !product) return <div className="producto"><p>{error || 'Producto no encontrado'}</p></div>;
 
-  const images = Array.isArray(product.images) && product.images.length > 0
+  const resolveImage = (url) => {
+    if (!url) return "/img/products/MacbookPro.jpg";
+    if (typeof url === "string" && (url.startsWith("http") || url.startsWith("/img/"))) {
+      return url;
+    }
+    // Si viene de /src/assets/... devolvemos un placeholder de /public/img existente
+    return "/img/products/MacbookPro.jpg";
+  };
+
+  const images = (Array.isArray(product.images) && product.images.length > 0
     ? product.images
-    : [product.image].filter(Boolean);
+    : [product.image].filter(Boolean))
+    .map(resolveImage);
 
   return (
     <div style={{ background: "#F5F5F5", minHeight: "100vh", padding: "2rem 0" }}>
