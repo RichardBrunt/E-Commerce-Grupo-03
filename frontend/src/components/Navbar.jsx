@@ -24,7 +24,11 @@ export const Navbar = () => {
         <Link to="/cart">Carrito <span className="badge">{itemsCount}</span></Link>
         {/* Renderizado condicional: si no hay usuario muestra Login, si hay usuario muestra Cerrar sesión */}
         {!user && <Link to="/login">Login</Link>}
-        {user && <button onClick={handleLogout} style={{marginLeft:8}}>Cerrar sesión</button>}
+        {user && (
+          <button onClick={handleLogout} className="apple-btn apple-btn-primary apple-btn-compact" style={{ marginLeft: 8 }}>
+            Cerrar sesión
+          </button>
+        )}
       </div>
     </nav>
   )

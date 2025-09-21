@@ -19,49 +19,16 @@
   ],
   "products": [
     {
-      "id": "1",
-      "name": "iPhone Air",
-      "categoryId": 2,
-      "price": 19999,
-      "stock": 5,
-      "image": "/img/products/IphoneAir.jpg",
-      "images": [
-        "/img/products/IphoneAir.jpg",
-        "/img/products/Iphone16.jpg",
-        "/img/products/Iphone17.jpg",
-        "/img/products/Iphone 17pro.jpg"
-      ],
-      "description": "Smartphone Apple line-up.",
-      "specs": {
-        "Chipset": "Apple Silicon",
-        "Pantalla": "OLED",
-        "Resolución": "-",
-        "Memoria RAM": "-",
-        "Almacenamiento": "-",
-        "Puertos": "USB-C",
-        "Teclado": "-",
-        "Audio": "Estéreo",
-        "Sistema Operativo": "iOS",
-        "Dimensiones": "-",
-        "Peso": "-",
-        "Batería": "-",
-        "Cámara": "-",
-        "Conectividad": "5G, WiFi, BT",
-        "Color": "Varios"
-      }
-    },
-    {
       "id": "2",
       "name": "Monitor 27\" QHD",
       "categoryId": 3,
-      "price": 459999,
-      "stock": 3,
+      "price": 459997,
+      "stock": 6,
       "image": "/img/products/SmartTV1.jpg",
       "images": [
         "/img/products/SmartTV1.jpg",
         "/img/products/SmartTV2.jpg",
-        "/img/products/SmartTV3.jpg",
-        "/img/products/SmartTV4.jpg"
+        "/img/products/SmartTV3.jpg"
       ],
       "description": "IPS 165Hz con DP.",
       "specs": {
@@ -145,6 +112,93 @@
         "Conectividad": "WiFi 6, Bluetooth 5.3",
         "Color": "Plata"
       }
+    },
+    {
+      "id": "5",
+      "name": "iPhone 17",
+      "categoryId": 2,
+      "price": 899999,
+      "stock": 10,
+      "image": "/img/products/Iphone17.jpg",
+      "images": [
+        "/img/products/Iphone17.jpg"
+      ],
+      "description": "El nuevo iPhone con rendimiento de próxima generación.",
+      "specs": {
+        "Chipset": "Apple A18",
+        "Pantalla": "6.1'' OLED Super Retina XDR",
+        "Resolución": "2556 x 1179",
+        "Memoria RAM": "8 GB",
+        "Almacenamiento": "128 GB",
+        "Puertos": "USB-C",
+        "Teclado": "-",
+        "Audio": "Stereo speakers",
+        "Sistema Operativo": "iOS",
+        "Dimensiones": "-",
+        "Peso": "-",
+        "Batería": "-",
+        "Cámara": "Doble 48 MP + 12 MP",
+        "Conectividad": "5G, WiFi 6E, Bluetooth 5.3",
+        "Color": "Medianoche"
+      }
+    },
+    {
+      "id": "6",
+      "name": "iPhone 17 Pro",
+      "categoryId": 2,
+      "price": 1199999,
+      "stock": 6,
+      "image": "/img/products/Iphone 17pro.jpg",
+      "images": [
+        "/img/products/Iphone 17pro.jpg"
+      ],
+      "description": "Potencia profesional con cámara avanzada y materiales premium.",
+      "specs": {
+        "Chipset": "Apple A18 Pro",
+        "Pantalla": "6.3'' OLED ProMotion 120Hz",
+        "Resolución": "2622 x 1206",
+        "Memoria RAM": "8 GB",
+        "Almacenamiento": "256 GB",
+        "Puertos": "USB-C",
+        "Teclado": "-",
+        "Audio": "Stereo speakers",
+        "Sistema Operativo": "iOS",
+        "Dimensiones": "-",
+        "Peso": "-",
+        "Batería": "-",
+        "Cámara": "Triple 48 MP + 12 MP + 12 MP (tele)",
+        "Conectividad": "5G, WiFi 7, Bluetooth 5.3, UWB",
+        "Color": "Titanio natural"
+      }
+    },
+    {
+      "id": "7",
+      "name": "iPhone 16",
+      "categoryId": 2,
+      "price": 749999,
+      "stock": 12,
+      "image": "/img/products/Iphone16.jpg",
+      "images": [
+        "/img/products/Iphone16.jpg"
+      ],
+      "description": "Rendimiento equilibrado y gran autonomía.",
+      "specs": {
+        "Chipset": "Apple A17",
+        "Pantalla": "6.1'' OLED Super Retina XDR",
+        "Resolución": "2556 x 1179",
+        "Memoria RAM": "6 GB",
+        "Almacenamiento": "128 GB",
+        "Puertos": "USB-C",
+        "Teclado": "-",
+        "Audio": "Stereo speakers",
+        "Sistema Operativo": "iOS",
+        "Dimensiones": "-",
+        "Peso": "-",
+        "Batería": "-",
+        "Cámara": "Doble 48 MP + 12 MP",
+        "Conectividad": "5G, WiFi 6E, Bluetooth 5.3",
+        "Color": "Azul"
+      }
     }
   ],
   "users": [
@@ -154,6 +208,14 @@
       "nombre": "Richard",
       "apellido": "Brunt",
       "email": "brunt300@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": "5969",
+      "usuario": "richardbnt",
+      "nombre": "Richard",
+      "apellido": "Brunt",
+      "email": "rich123@gmail.com",
       "password": "123456"
     }
   ]

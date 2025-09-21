@@ -1,10 +1,10 @@
 /* Footer inspirado en el header, moderno y cómodo visualmente */
 .ml-footer {
-  background: #E0E0E0;
-  color: #1A1A1A;
+  background: #000000; /* negro */
+  color: #FFFFFF; /* texto blanco */
   font-family: 'Segoe UI', Arial, sans-serif;
-  border-top: 1.5px solid #CCCCCC;
-  margin-top: 2rem;
+  border-top: 1.5px solid #1f1f1f; /* borde sutil oscuro */
+  margin-top: 0; /* sin espacio extra arriba */
 }
 
 .ml-footer-content {
@@ -12,8 +12,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 2.5rem 4vw 1.5rem 4vw;
-  gap: 2.5rem;
+  padding: 1.5rem 4vw 1rem 4vw; /* menos alto */
+  gap: 1.5rem; /* menos separación */
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -39,17 +39,17 @@
 
 .ml-footer-links li,
 .ml-footer-contact li {
-  margin-bottom: 0.5rem;
-  font-size: 1.05rem;
+  margin-bottom: 0.35rem; /* compactar */
+  font-size: 1rem;
 }
 
 .ml-footer-links a {
-  color: #1A1A1A;
+  color: #FFFFFF;
   text-decoration: none;
   transition: color 0.2s;
 }
 .ml-footer-links a:hover {
-  color: #333333;
+  color: #FFD700; /* dorado */
   text-decoration: underline;
 }
 
@@ -65,23 +65,30 @@
   margin-top: 0.5rem;
 }
 .ml-footer-social-icons a {
-  color: #1A1A1A;
+  color: #FFFFFF; /* íconos blancos */
   font-size: 1.5rem;
   transition: color 0.2s, transform 0.2s;
 }
 .ml-footer-social-icons a:hover {
-  color: #333333;
+  color: #FFD700; /* hover dorado */
   transform: scale(1.15);
 }
 
 .ml-footer-bottom {
   text-align: center;
-  padding: 1rem 0 0.5rem 0;
-  font-size: 1rem;
-  color: #333333;
-  background: #E0E0E0;
-  border-top: 1px solid #CCCCCC;
-  margin-top: 1rem;
+  padding: 0.75rem 0 0.5rem 0; /* menos alto */
+  font-size: 0.95rem;
+  color: #FFFFFF; /* texto blanco */
+  background: #000000; /* negro */
+  border-top: 1px solid #1f1f1f; /* sutil */
+  margin-top: 0; /* eliminamos separación extra */
+}
+
+/* Atajos en dos columnas (grid) para reducir altura visual */
+.ml-footer-links ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem 1rem; /* filas más juntas, columnas separadas */
 }
 
 @media (max-width: 900px) {
@@ -92,5 +99,10 @@
   }
   .ml-footer-section {
     min-width: 0;
+  }
+  /* En mobile, atajos vuelven a una columna */
+  .ml-footer-links ul {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 }

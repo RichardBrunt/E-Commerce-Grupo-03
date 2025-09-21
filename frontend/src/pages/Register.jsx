@@ -2,44 +2,21 @@
 // Componente controlado, validación de datos, manejo de estado y renderizado condicional
 // Utiliza useState para estado local, useNavigate para navegación SPA, useAuth para contexto global
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext.jsx'
+import '../assets/Cart.css'
+import '../assets/Login.css'
 
 export default function Register(){
-  // Estado local para inputs y errores (useState, hook de React)
+  // Estado local
   const [form, setForm] = useState({ usuario:'', nombre:'', apellido:'', email:'', password:'', confirm:'' })
   const [error, setError] = useState(null)
   const [submitting, setSubmitting] = useState(false)
-  const navigate = useNavigate() // SPA: navegación sin recargar la página
-  const { register } = useAuth() // useContext para acceder a la función global de registro
+  const [showPw, setShowPw] = useState(false)
+  const [showConfirm, setShowConfirm] = useState(false)
+  const navigate = useNavigate()
+  const { register } = useAuth()
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
-
-  // Estilos inline, consistentes con Login.jsx y paleta del proyecto
-  const styles = {
-    page: { minHeight: 'calc(100vh - 120px)', display: 'grid', placeItems: 'center', padding: '2rem 1rem' },
-    card: {
-      width: '100%', maxWidth: 520,
-      background: 'var(--surface, #141414)', color: 'var(--text, #eaeaea)',
-      border: '1px solid var(--border, #2a2a2a)', borderRadius: 18,
-      padding: '1.5rem', boxShadow: '0 10px 30px rgba(0,0,0,.35)',
-      boxSizing: 'border-box', overflow: 'hidden', display: 'grid', gap: '1rem'
-    },
-    title: { textAlign: 'center', fontSize: '1.5rem', margin: 0 },
-    grid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '.75rem' },
-    inputGroup: { position: 'relative', width: '100%', maxWidth: '100%', boxSizing: 'border-box', overflow: 'hidden', borderRadius: 12 },
-    input: {
-      width: '100%', maxWidth: '100%', display: 'block', boxSizing: 'border-box',
-      padding: '.75rem .9rem', background: '#111', color: 'var(--text, #eaeaea)',
-      border: '1px solid var(--border, #2a2a2a)', borderRadius: 12
-    },
-    submit: {
-      width: '100%', maxWidth: '100%', boxSizing: 'border-box', display: 'block',
-      background: '#000', color: '#fff',
-      border: '1px solid #333', borderRadius: 12, padding: '.9rem 1rem', fontWeight: 700,
-      cursor: 'pointer', opacity: submitting ? .7 : 1
-    },
-    error: { color: 'tomato', marginTop: '.25rem' }
-  }
 
   // Validación y manejo de submit
   const onSubmit = async (e) => {
@@ -81,42 +58,67 @@ export default function Register(){
     }
   }
 
-  // Renderizado condicional de errores y formulario
+  // UI con estilos compartidos con Login
   return (
-    <div style={styles.page}>
-      <form onSubmit={onSubmit} style={styles.card}>
-        <h2 style={styles.title}>Crear cuenta</h2>
+    <div className="auth-page">
+      <section className="auth-hero-banner" aria-label="Bienvenida a la página de registro">
+        <div className="auth-hero-content">
+          <h1 className="auth-hero-title">Crear tu cuenta</h1>
+          <p className="auth-hero-desc">Registrate para guardar tus compras y acelerar tu checkout.</p>
+        </div>
+        <div className="auth-hero-img-container">
+          <img src="/img/banners/hero_intro_endframe__e6khcva4hkeq_large.jpg" alt="Macbook Banner" className="auth-hero-img" />
+        </div>
+      </section>
 
-        <div style={styles.grid}>
-          <div style={styles.inputGroup}>
-            <input name="usuario" placeholder="Usuario" onChange={onChange} value={form.usuario} style={styles.input} required />
+      <form onSubmit={onSubmit} className="auth-card">
+        <header className="auth-header">
+          <h2 className="auth-title">Crear cuenta</h2>
+          <p className="auth-subtext">Completá tus datos para registrarte.</p>
+        </header>
+
+        <div className="auth-fields">
+          <div className="form-row">
+            <div className="form-group input-group">
+              <input className="auth-input" name="usuario" placeholder="Usuario" onChange={onChange} value={form.usuario} required />
+            </div>
+            <div className="form-group input-group">
+              <input className="auth-input" name="email" placeholder="Correo electrónico" type="email" onChange={onChange} value={form.email} required autoComplete="email" />
+            </div>
           </div>
-          <div style={styles.inputGroup}>
-            <input name="email" placeholder="Correo electrónico" type="email" onChange={onChange} value={form.email} style={styles.input} required />
+
+          <div className="form-row">
+            <div className="form-group input-group">
+              <input className="auth-input" name="nombre" placeholder="Nombre" onChange={onChange} value={form.nombre} required />
+            </div>
+            <div className="form-group input-group">
+              <input className="auth-input" name="apellido" placeholder="Apellido" onChange={onChange} value={form.apellido} required />
+            </div>
+          </div>
+
+          <div className="form-group input-group">
+            <input className="auth-input" name="password" placeholder="Contraseña" type={showPw ? 'text' : 'password'} onChange={onChange} value={form.password} required autoComplete="new-password" />
+            <button type="button" className="toggle-visibility" onClick={()=>setShowPw(s=>!s)} aria-label={showPw? 'Ocultar contraseña':'Mostrar contraseña'}>
+              {showPw ? '🙈' : '👁️'}
+            </button>
+          </div>
+          <div className="form-group input-group">
+            <input className="auth-input" name="confirm" placeholder="Confirmar contraseña" type={showConfirm ? 'text' : 'password'} onChange={onChange} value={form.confirm} required autoComplete="new-password" />
+            <button type="button" className="toggle-visibility" onClick={()=>setShowConfirm(s=>!s)} aria-label={showConfirm? 'Ocultar confirmación':'Mostrar confirmación'}>
+              {showConfirm ? '🙈' : '👁️'}
+            </button>
           </div>
         </div>
 
-        <div style={styles.grid}>
-          <div style={styles.inputGroup}>
-            <input name="nombre" placeholder="Nombre" onChange={onChange} value={form.nombre} style={styles.input} required />
-          </div>
-          <div style={styles.inputGroup}>
-            <input name="apellido" placeholder="Apellido" onChange={onChange} value={form.apellido} style={styles.input} required />
-          </div>
-        </div>
+        {error && <p className="auth-error">{error}</p>}
 
-        <div style={styles.inputGroup}>
-          <input name="password" placeholder="Contraseña" type="password" onChange={onChange} value={form.password} style={styles.input} required />
-        </div>
-        <div style={styles.inputGroup}>
-          <input name="confirm" placeholder="Confirmar contraseña" type="password" onChange={onChange} value={form.confirm} style={styles.input} required />
-        </div>
-
-        {error && <p style={styles.error}>{error}</p>}
-
-        <button type="submit" style={styles.submit} disabled={submitting}>
+        <button type="submit" className="btn-primary btn-block" disabled={submitting}>
           {submitting ? 'Registrando…' : 'Registrarme'}
         </button>
+
+        <div className="auth-footer">
+          ¿Ya tenés cuenta? <Link to="/login" className="auth-link">Iniciar sesión</Link>
+        </div>
       </form>
     </div>
   )

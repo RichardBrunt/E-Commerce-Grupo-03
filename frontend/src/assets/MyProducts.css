@@ -1,0 +1,80 @@
+:root {
+  --black: #000;
+  --white: #fff;
+  --gold: #FFD700;
+  --text: #111;
+  --muted: #6b7280;
+  --border: #E5E7EB;
+  --bg: #ffffff;
+  --bg-alt: #fafafa;
+}
+
+.table-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  margin-top: 12px;
+}
+.table-scroll { overflow: auto; }
+
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  min-width: 860px;
+}
+.table thead th {
+  position: sticky;
+  top: 0;
+  background: #f7f7f7;
+  color: #222;
+  font-weight: 700;
+  text-align: left;
+  font-size: 0.9rem;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  z-index: 1;
+}
+.table tbody tr:nth-child(even) { background: var(--bg-alt); }
+.table tbody tr:nth-child(odd) { background: var(--bg); }
+.table tbody td {
+  padding: 12px 14px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.col-id { width: 80px; white-space: nowrap; }
+.col-price { width: 140px; white-space: nowrap; }
+.col-stock { width: 160px; white-space: nowrap; }
+.col-actions { width: 420px; }
+
+.price { font-weight: 800; }
+
+.name-cell { display: grid; grid-template-columns: 56px 1fr; gap: 10px; align-items: center; }
+.thumb {
+  width: 56px; height: 56px; object-fit: cover; border-radius: 10px; border: 1px solid var(--border); background: #f2f2f2;
+}
+.name-text { min-width: 0; }
+.name-main { font-weight: 600; color: #111; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.name-sub { color: var(--muted); }
+
+.stock-pill {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid var(--border);
+}
+.stock-pill.ok { background: #eaf7ee; color: #0a7a2f; border-color: #bde5c8; }
+.stock-pill.out { background: #fdecec; color: #b42318; border-color: #f5c2c2; }
+
+.actions { display: flex; gap: 8px; align-items: center; }
+.btn-sm { padding: 8px 12px; font-size: 14px; border-radius: 10px; }
+.btn-ghost.danger { color: #b42318; border-color: #f3d1d1; }
+.btn-ghost.danger:hover { background: #ffd1d1; color: #7a0a0a; border-color: #ffd1d1; }
+
+/* Botón mediano para la vista (Editar / Ver en tienda) */
+.btn-md { padding: 10px 14px; font-size: 15px; border-radius: 12px; }
