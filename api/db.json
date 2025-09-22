@@ -217,6 +217,14 @@
       "apellido": "Brunt",
       "email": "rich123@gmail.com",
       "password": "123456"
+    },
+    {
+      "id": "d888",
+      "usuario": "juangonzalez",
+      "nombre": "Juan Ignacio",
+      "apellido": "Gonzalez",
+      "email": "juanurro27@gmail.com",
+      "password": "pepito123"
     }
   ]
 }
