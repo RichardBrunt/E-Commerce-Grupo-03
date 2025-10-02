@@ -144,13 +144,16 @@
     },
     {
       "id": "6",
-      "name": "iPhone 17 Pro",
+      "name": "iPhone 16 Pro Max",
       "categoryId": 2,
       "price": 1199999,
       "stock": 6,
-      "image": "/img/products/Iphone 17pro.jpg",
+      "image": "https://http2.mlstatic.com/D_NQ_NP_893557-MLU79115488779_092024-O.webp",
       "images": [
-        "/img/products/Iphone 17pro.jpg"
+        "https://http2.mlstatic.com/D_NQ_NP_893557-MLU79115488779_092024-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_779610-MLU79115272055_092024-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_635600-MLU78878295680_092024-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_2X_714327-MLU79115735703_092024-F.webp"
       ],
       "description": "Potencia profesional con cámara avanzada y materiales premium.",
       "specs": {
