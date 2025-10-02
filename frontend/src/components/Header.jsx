@@ -20,12 +20,14 @@ const Header = () => {
     <header className="ml-header">
       <div className="ml-header-top">
         <div className="ml-logo-section">
-          <Link to="/">
+          <Link to="/" aria-label="Ir a inicio">
             <img
               src="/img/EcommerceLogoHeader.png"
-              alt="Logo Ecomme PC Store"
+              alt="Ecommerce PC Store"
               className="ml-logo"
-              onError={(e) => { e.currentTarget.src = "/img/products/MacbookPro.jpg"; }}
+              decoding="async"
+              fetchpriority="high"
+              onError={(e) => { e.currentTarget.src = '/img/products/MacbookPro.jpg'; e.currentTarget.alt='Logo alternativo'; }}
             />
           </Link>
           <span className="ml-location">Enviar a <b>Capital Federal C1114</b></span>

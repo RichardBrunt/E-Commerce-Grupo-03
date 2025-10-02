@@ -15,50 +15,21 @@
     {
       "id": "4",
       "name": "Teclados"
+    },
+    {
+      "id": "cdbe",
+      "name": "AirPods"
     }
   ],
   "products": [
-    {
-      "id": "2",
-      "name": "Monitor 27\" QHD",
-      "categoryId": 3,
-      "price": 459997,
-      "stock": 6,
-      "image": "/img/products/SmartTV1.jpg",
-      "images": [
-        "/img/products/SmartTV1.jpg",
-        "/img/products/SmartTV2.jpg",
-        "/img/products/SmartTV3.jpg"
-      ],
-      "description": "IPS 165Hz con DP.",
-      "specs": {
-        "Chipset": "-",
-        "Pantalla": "27'' QHD IPS",
-        "Resolución": "2560 x 1440",
-        "Memoria RAM": "-",
-        "Almacenamiento": "-",
-        "Puertos": "HDMI, DisplayPort, USB",
-        "Teclado": "-",
-        "Audio": "2 parlantes integrados",
-        "Sistema Operativo": "-",
-        "Dimensiones": "61 x 37 x 5 cm",
-        "Peso": "4.5 kg",
-        "Batería": "-",
-        "Cámara": "-",
-        "Conectividad": "-",
-        "Color": "Negro"
-      }
-    },
     {
       "id": "3",
       "name": "MacBook Pro 14\"",
       "categoryId": 1,
       "price": 799999,
       "stock": 8,
-      "image": "/img/products/MacbookPro.jpg",
+      "image": "/img/products/MacbookPro3.jpg",
       "images": [
-        "/img/products/MacbookPro.jpg",
-        "/img/products/MacbookPro2.jpg",
         "/img/products/MacbookPro3.jpg",
         "/img/products/MacbookPro4.jpg"
       ],
