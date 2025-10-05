@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { registerUser, loginUser, findUsersByEmail } from '@/services/api.js'
+import { registerUser, loginUser, findUsersByEmail, updateUser } from '@/services/api.js'
 
 const AuthCtx = createContext(null)
 export const useAuth = () => useContext(AuthCtx)
@@ -49,5 +49,19 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('uade_user')
   }
 
-  return <AuthCtx.Provider value={{ user, login, logout, register }}>{children}</AuthCtx.Provider>
+  const updateProfile = async (partial) => {
+    try {
+      if (!user?.id) return null
+      const updated = await updateUser(user.id, partial)
+      // json-server devuelve el objeto completo actualizado
+      setUser(updated)
+      localStorage.setItem('uade_user', JSON.stringify(updated))
+      return updated
+    } catch (e) {
+      console.error('update profile error', e)
+      return null
+    }
+  }
+
+  return <AuthCtx.Provider value={{ user, login, logout, register, updateProfile }}>{children}</AuthCtx.Provider>
 }

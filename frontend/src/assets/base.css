@@ -320,3 +320,31 @@ th, td { text-align:left; padding:12px; }
 .checkout-button:hover {
   background-color: #114411;
 }
+
+/* ===== Profile styles (moved from Profile.css to avoid new files) ===== */
+.profile-wrap { padding: 1.5rem; }
+.profile-card { max-width: 960px; margin: 0 auto; background: #FFFFFF; color: #1A1A1A; border: 1px solid #E0E0E0; border-radius: 12px; box-shadow: 0 8px 28px rgba(0,0,0,.05); overflow: hidden; }
+.profile-header { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border-bottom: 1px solid #E0E0E0; background: #F9F9F9; }
+.profile-avatar { width: 72px; height: 72px; border-radius: 50%; border: 2px solid #E0E0E0; object-fit: cover; }
+.profile-title { margin: 0; font-size: 1.25rem; font-weight: 700; }
+.profile-sub { margin: .15rem 0 0; color: #555; font-size: .95rem; }
+.profile-body { padding: 1.25rem; display: grid; gap: 1rem; }
+.profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .75rem 1rem; }
+.profile-item { background:#FAFAFA; border:1px solid #EAEAEA; border-radius:8px; padding:.75rem 1rem; }
+.profile-item b { display:block; font-size:.85rem; color:#555; margin-bottom:.25rem; font-weight:600; }
+.profile-actions { display:flex; flex-wrap:wrap; gap:.5rem; justify-content:flex-end; margin-top:.5rem; }
+.profile-btn { cursor:pointer; border-radius:10px; border:1px solid #333333; padding:.5rem .9rem; background:#FFFFFF; color:#1A1A1A; transition: background .2s, transform .08s; }
+.profile-btn:hover { background:#F5F5F5; }
+.profile-btn:active { transform: scale(.98); }
+.profile-btn.primary { background:#333333; color:#FFFFFF; border-color:#333333; }
+.profile-btn.primary:hover { background:#000000; }
+.profile-btn.danger { color:#B00020; border-color:#E0E0E0; }
+.profile-btn.link { border-color:transparent; }
+.profile-form { padding: 1.25rem; display: grid; gap: 1rem; }
+.profile-form-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.profile-field { display:flex; flex-direction:column; gap:.35rem; }
+.profile-label { font-size:.9rem; color:#555; }
+.profile-input { background:#FFFFFF; color:#1A1A1A; border:1px solid #E0E0E0; border-radius:8px; padding:.6rem .75rem; outline:none; }
+.profile-input:focus { border-color:#333333; box-shadow: 0 0 0 3px rgba(0,0,0,.05); }
+.profile-form-actions { display:flex; justify-content:flex-end; gap:.6rem; }
+

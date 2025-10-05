@@ -10,6 +10,8 @@ import Register from '@/pages/Register.jsx'
 import MyProducts from '@/pages/MyProducts.jsx'
 import NotFound from '@/pages/NotFound.jsx'
 import { useAuth } from '@/contexts/AuthContext.jsx'
+import Profile from '@/pages/Profile.jsx'
+import ProfileEdit from '@/pages/ProfileEdit.jsx'
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
@@ -40,6 +42,22 @@ export const AppRouter = () => (
       element={
         <ProtectedRoute>
           <MyProducts />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/profile"
+      element={
+        <ProtectedRoute>
+          <Profile />
+        </ProtectedRoute>
+      }
+    />
+    <Route
+      path="/profile/edit"
+      element={
+        <ProtectedRoute>
+          <ProfileEdit />
         </ProtectedRoute>
       }
     />

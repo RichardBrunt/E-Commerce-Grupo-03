@@ -175,11 +175,12 @@
   "users": [
     {
       "id": "0080",
-      "usuario": "Richard",
+      "usuario": "richard",
       "nombre": "Richard",
       "apellido": "Brunt",
       "email": "brunt300@gmail.com",
-      "password": "123456"
+      "password": "123456",
+      "avatar": "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcR9OeAMlzpleGjN1f2glIgO5roSDWp3VhklgVIJ_Hg78A3Gzimz4h113_ZKGnbedQnfM7OLvBwAcrst-GcQ6Tx_75pQI9hvwGAld6K0dYhzffQfhX3NS0lzuTivLs-63qEq73gmLBaXaOZ5"
     },
     {
       "id": "5969",
