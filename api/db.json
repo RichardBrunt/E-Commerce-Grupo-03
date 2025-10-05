@@ -27,7 +27,7 @@
       "name": "MacBook Pro 14\"",
       "categoryId": 1,
       "price": 799999,
-      "stock": 8,
+      "stock": 6,
       "image": "/img/products/MacbookPro3.jpg",
       "images": [
         "/img/products/MacbookPro3.jpg",
@@ -112,8 +112,7 @@
         "Conectividad": "5G, WiFi 6E, Bluetooth 5.3",
         "Color": "Medianoche"
       }
-    },
-    {
+    },x
       "id": "6",
       "name": "iPhone 17 Pro",
       "categoryId": 2,
