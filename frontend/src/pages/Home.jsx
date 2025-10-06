@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Banners from '@/components/Banners.jsx'
 import { useNavigate } from 'react-router-dom'
 import { listProducts, listCategories, getProduct } from '@/services/api.js'
 import { useFilters } from '@/contexts/FiltersContext.jsx'
@@ -56,19 +57,7 @@ export default function Home() {
 
   return (
     <section className="apple-section">
-      <section className="apple-hero-banner">
-        <div className="apple-hero-content">
-          <h1 className="apple-hero-title">MacBook Air M4</h1>
-          <p className="apple-hero-desc">Potencia y portabilidad en su máxima expresión.</p>
-          <div className="apple-hero-price-row">
-            <span className="apple-hero-price">$1.499.999</span>
-            <button className="apple-hero-btn-main" onClick={handleBuyNow}>Comprar Ahora</button>
-          </div>
-        </div>
-        <div className="apple-hero-img-container">
-          <img src="/img/banners/hero_intro_endframe__e6khcva4hkeq_large.jpg" alt="Macbook Banner" className="apple-hero-img" />
-        </div>
-      </section>
+      <Banners categoryId={categoryId || '1'} onBuy={handleBuyNow} />
 
       {/* Scrollbar de categorías alineada con la grilla (columna derecha) */}
       <div className="apple-categories-container">
