@@ -23,3 +23,5 @@ export const loginUser = async ({ email, password }) => {
   return users[0] || null
 }
 export const findUsersByEmail = async (email) => api.get('/users', { params: { email } }).then(r => r.data)
+// Update current user
+export const updateUser = (id, data) => api.patch(`/users/${id}`, data).then(r => r.data)
