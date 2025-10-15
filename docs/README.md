@@ -26,6 +26,7 @@ Y en `frontend/package.json`:
 	- src/contexts: CartContext, AuthContext, FiltersContext
 	- src/services/api.js: axios con baseURL configurable
 	- public/img: assets (logo en `/img/EcommerceLogoHeader.png`)
+	- Dependencias UI: `react-icons` (iconografía en componentes como Header/Footer)
 
 ## Scripts (estándar de arranque)
 Levantar todo desde frontend con un único comando:
@@ -47,6 +48,22 @@ Scripts esperados en `frontend/package.json`:
 	}
 }
 ```
+
+### Dependencia de íconos (react-icons)
+Este proyecto utiliza `react-icons` para mostrar íconos en algunos componentes (por ejemplo, Header y/o Footer). Si al levantar el proyecto aparece un error tipo “Failed to resolve import 'react-icons/fa'”, asegurate de tener instalada la dependencia en `frontend/`:
+
+```bash
+cd frontend
+npm i react-icons
+```
+
+Uso: permite importar paquetes de íconos populares (FontAwesome, Material, etc.) con imports como:
+
+```js
+import { FaSearch, FaShoppingCart } from 'react-icons/fa';
+```
+
+Nota: como alternativa sin dependencias, podés usar SVG inline. Si se decide migrar a SVG/emoji, quitar los imports de `react-icons` para evitar errores.
 
 ## Configuración de API (entorno)
 Usar variable de entorno para la base URL:
@@ -87,8 +104,8 @@ Y en `src/services/api.js` leer `import.meta.env.VITE_API_BASE_URL`.
 - Puerto ocupado (3000 o 5173):
 	- macOS: `lsof -i :3000 | awk 'NR>1{print $2}' | xargs kill -9`
 - `react-icons` not found:
-	- O instalarlo: `npm i react-icons`
-	- O reemplazar por SVG inline/emoji y quitar importaciones.
+	- Instalar en `frontend/`: `npm i react-icons`
+	- O reemplazar por SVG inline/emoji y quitar importaciones si el equipo prefiere no usar la librería.
 - Imágenes que no cargan:
 	- Confirmar rutas bajo `frontend/public` (usar `/img/...`). Evitar espacios.
 
