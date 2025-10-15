@@ -1,0 +1,108 @@
+/* Footer inspirado en el header, moderno y cómodo visualmente */
+.ml-footer {
+  background: #000000; /* negro */
+  color: #FFFFFF; /* texto blanco */
+  font-family: 'Segoe UI', Arial, sans-serif;
+  border-top: 1.5px solid #1f1f1f; /* borde sutil oscuro */
+  margin-top: 0; /* sin espacio extra arriba */
+}
+
+.ml-footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem 4vw 1rem 4vw; /* menos alto */
+  gap: 1.5rem; /* menos separación */
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.ml-footer-section {
+  min-width: 180px;
+  flex: 1 1 200px;
+}
+
+.ml-footer-logo {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.ml-footer-links ul,
+.ml-footer-contact ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ml-footer-links li,
+.ml-footer-contact li {
+  margin-bottom: 0.35rem; /* compactar */
+  font-size: 1rem;
+}
+
+.ml-footer-links a {
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ml-footer-links a:hover {
+  color: #FFD700; /* dorado */
+  text-decoration: underline;
+}
+
+.ml-footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ml-footer-social-icons {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.5rem;
+}
+.ml-footer-social-icons a {
+  color: #FFFFFF; /* íconos blancos */
+  font-size: 1.5rem;
+  transition: color 0.2s, transform 0.2s;
+}
+.ml-footer-social-icons a:hover {
+  color: #FFD700; /* hover dorado */
+  transform: scale(1.15);
+}
+
+.ml-footer-bottom {
+  text-align: center;
+  padding: 0.75rem 0 0.5rem 0; /* menos alto */
+  font-size: 0.95rem;
+  color: #FFFFFF; /* texto blanco */
+  background: #000000; /* negro */
+  border-top: 1px solid #1f1f1f; /* sutil */
+  margin-top: 0; /* eliminamos separación extra */
+}
+
+/* Atajos en dos columnas (grid) para reducir altura visual */
+.ml-footer-links ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.35rem 1rem; /* filas más juntas, columnas separadas */
+}
+
+@media (max-width: 900px) {
+  .ml-footer-content {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem 1rem 1rem 1rem;
+  }
+  .ml-footer-section {
+    min-width: 0;
+  }
+  /* En mobile, atajos vuelven a una columna */
+  .ml-footer-links ul {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}

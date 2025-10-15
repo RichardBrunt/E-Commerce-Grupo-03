@@ -1,0 +1,107 @@
+/* Login.css - Estilos de autenticación consistentes con Cart.css */
+
+.auth-page {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  background: #f2f2f2;
+}
+
+/* Mini hero superior */
+.auth-hero-banner {
+  width: 100vw;
+  min-height: 200px; /* aún más compacto */
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  box-sizing: border-box;
+}
+.auth-hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 7vw;
+  z-index: 2;
+}
+.auth-hero-title { font-size: 1.9rem; font-weight: 800; color: #fff; margin: 0 0 .5rem 0; letter-spacing: -.3px; }
+.auth-hero-desc { font-size: .95rem; color: #e0e0e0; margin-bottom: .75rem; }
+.auth-hero-img-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  z-index: 1;
+}
+.auth-hero-img {
+  width: 300px; /* más compacta */
+  max-width: 45vw;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+  filter: drop-shadow(0 16px 32px rgba(0,0,0,.4));
+}
+@media (max-width: 900px) {
+  .auth-hero-banner { flex-direction: column; min-height: 180px; padding: 0; }
+  .auth-hero-content { align-items: center; padding: 2rem 1rem 1rem 1rem; text-align: center; }
+  .auth-hero-img { width: 90vw; max-width: 90vw; margin: 0 auto 1.5rem auto; }
+}
+
+.auth-card {
+  width: min(440px, 96vw);
+  background: #fff;
+  color: #111;
+  border: 1px solid #E0E0E0;
+  border-radius: .75rem;
+  padding: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,.10);
+  display: grid;
+  gap: .75rem;
+}
+
+.auth-header { text-align: center; }
+.auth-title { margin: 0; font-size: 1.5rem; font-weight: 800; }
+.auth-subtext { margin: 0; color: #666; font-size: .95rem; }
+
+.auth-fields { display: grid; gap: .75rem; margin-top: .25rem; }
+.form-group { display: grid; gap: .35rem; }
+
+.input-group { position: relative; }
+.field-icon { display: none; }
+.auth-input {
+  width: 100%;
+  background: #fff;
+  color: #000;
+  border: 1.5px solid #C8C8C8;
+  border-radius: .5rem;
+  padding: .7rem 2.4rem .7rem .9rem; /* sin icono a la izquierda, espacio para toggle a la derecha */
+  box-sizing: border-box;
+}
+.auth-input:hover { background: #fff; border-color: #B0B0B0; }
+.auth-input:focus { background: #fff; border-color: #808080; box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.18); outline: none; }
+
+.toggle-visibility { position: absolute; right: .5rem; top: 50%; transform: translateY(-50%); background: transparent; border: none; color: #666; cursor: pointer; font-size: 1rem; width: 2rem; height: 2rem; display: grid; place-items: center; }
+/* Eliminamos iconos para evitar solapamiento */
+
+.auth-actions { display: flex; justify-content: flex-end; margin: .25rem 0; }
+.auth-link { color: #000; text-decoration: underline; font-weight: 600; }
+.auth-link:hover { color: #8a6a00; }
+
+.auth-error { color: #b42318; font-weight: 600; margin: .25rem 0; }
+
+.auth-footer { text-align: center; color: #666; margin-top: .5rem; }
+
+/* Asegurar que el texto quede por encima de las imágenes del hero */
+.auth-hero .auth-hero-title,
+.auth-hero .auth-hero-desc { position: relative; z-index: 1; }

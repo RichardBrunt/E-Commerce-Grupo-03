@@ -1,3 +1,5 @@
+// router.jsx
+// Ejemplo de SPA con React Router, rutas protegidas, renderizado condicional y contexto
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Home from '@/pages/Home.jsx'
@@ -11,22 +13,43 @@ import { useAuth } from '@/contexts/AuthContext.jsx'
 
 function ProtectedRoute({ children }) {
   const { user } = useAuth()
+  // Renderizado condicional: si no hay usuario, redirige a login
   if (!user) return <Navigate to="/login" replace />
   return children
 }
 
+function PublicRoute({ children }) {
+  const { user } = useAuth()
+  // Si ya está logueado, evita volver a login/register
+  if (user) return <Navigate to="/" replace />
+  return children
+}
+
+// SPA: define las rutas principales de la aplicación
 export const AppRouter = () => (
   <Routes>
-    <Route path="/" element={<Home />} />
+  <Route path="/" element={<Home />} />
     <Route path="/product/:id" element={<ProductDetail />} />
     <Route path="/cart" element={<Cart />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/register" element={<Register />} />
-    <Route path="/my-products" element={
-      <ProtectedRoute>
-        <MyProducts />
-      </ProtectedRoute>
-    } />
+    <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+    <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+
+    {/* Rutas protegidas: solo para usuarios logueados */}
+    <Route
+      path="/gestion-stock"
+      element={
+        <ProtectedRoute>
+          <MyProducts />
+        </ProtectedRoute>
+      }
+    />
+
+    {/* Compat: redirigir rutas antiguas */}
+    <Route path="/my-products" element={<Navigate to="/gestion-stock" replace />} />
+
+    {/* Redirección de rutas antiguas (compat) */}
+    <Route path="/mercaderia/*" element={<Navigate to="/gestion-stock" replace />} />
+
     <Route path="*" element={<NotFound />} />
   </Routes>
 )

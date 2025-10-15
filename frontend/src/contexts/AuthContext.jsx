@@ -1,10 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { loginUser, registerUser } from '@/services/api.js'
+import { registerUser, loginUser, findUsersByEmail } from '@/services/api.js'
 
 const AuthCtx = createContext(null)
 export const useAuth = () => useContext(AuthCtx)
 
-export function AuthProvider({ children }){
+export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -13,16 +13,41 @@ export function AuthProvider({ children }){
   }, [])
 
   const login = async (email, password) => {
-    const u = await loginUser({ email, password })
-    if (u) { setUser(u); localStorage.setItem('uade_user', JSON.stringify(u)) }
-    return u
+    try {
+      // Autenticación contra json-server (persistencia)
+      const found = await loginUser({ email, password })
+      if (!found) return null
+      setUser(found)
+      localStorage.setItem('uade_user', JSON.stringify(found))
+      return found
+    } catch (e) {
+      console.error('login error', e)
+      return null
+    }
   }
+
   const register = async (payload) => {
-    const u = await registerUser(payload)
-    setUser(u); localStorage.setItem('uade_user', JSON.stringify(u))
-    return u
+    try {
+      // Persistencia: validar unicidad por email y crear en /users
+      const { confirm, ...data } = payload || {}
+      const existing = await findUsersByEmail(data.email)
+      if (Array.isArray(existing) && existing.length > 0) return null
+
+      // Guardamos los mismos campos que maneja el front (usuario/nombre/apellido/email/password)
+      const created = await registerUser({ ...data })
+      setUser(created)
+      localStorage.setItem('uade_user', JSON.stringify(created))
+      return created
+    } catch (e) {
+      console.error('register error', e)
+      return null
+    }
   }
-  const logout = () => { setUser(null); localStorage.removeItem('uade_user') }
+
+  const logout = () => {
+    setUser(null)
+    localStorage.removeItem('uade_user')
+  }
 
   return <AuthCtx.Provider value={{ user, login, logout, register }}>{children}</AuthCtx.Provider>
 }

@@ -1,56 +1,98 @@
-import React, { useState } from 'react'                      // useState: estado local para email, password, error, isAdmin
-import { useNavigate, Link } from 'react-router-dom'         // useNavigate: navegación programática; Link: navegación SPA sin recarga
-import { useAuth } from '@/contexts/AuthContext.jsx'         // useContext (vía useAuth): acceso a la función login del AuthContext
+// Login.jsx
+// Componente controlado, validación de datos, manejo de estado y renderizado condicional
+// Utiliza useState para estado local, useNavigate para navegación SPA, useAuth para contexto global
+import React, { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import { useAuth } from '@/contexts/AuthContext.jsx'
+import '../assets/Cart.css'
+import '../assets/Login.css'
 
-import './login.css'                                         // Importación de estilos locales
+export default function Login(){
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState(null)
+  const [showPassword, setShowPassword] = useState(false)
+  const navigate = useNavigate()
+  const { login } = useAuth()
 
-export default function Login() {
-  const [email, setEmail] = useState('')                     // useState: guarda el email del input
-  const [password, setPassword] = useState('')               // useState: guarda la contraseña del input
-  const [error, setError] = useState(null)                   // useState: guarda mensajes de error para mostrar feedback
-  const [isAdmin, setIsAdmin] = useState(false)              // useState: flag que alterna entre modo usuario / admin
-
-  const navigate = useNavigate()                             // useNavigate: se usa para redirigir tras el login
-  const { login } = useAuth()                                // useContext (vía useAuth): obtiene la función login del contexto
-
-  const onSubmit = async (e) => {                            // Manejo de submit asíncrono: previene recarga y llama a login
-    e.preventDefault()                                       // preventDefault: evita recarga completa del navegador
-    const u = await login(email, password, isAdmin)          // Llamada asincrónica a la lógica de autenticación (useAuth / login)
-    if (!u) return setError('Credenciales inválidas')        // Renderizado condicional: setea error si falla la autenticación
-    navigate(isAdmin ? '/admin' : '/')                       // Navegación programática tras login exitoso (useNavigate)
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    setError(null)
+    if (!email || !password) {
+      setError('Completa todos los campos')
+      return
+    }
+    const u = await login(email, password)
+    if (!u) return setError('Credenciales inválidas')
+    navigate('/cart')
   }
 
   return (
-    <form onSubmit={onSubmit} className="login-form">
-      <h2>{isAdmin ? "Iniciar sesión (Administrador)" : "Iniciar sesión"}</h2>
+    <div className="auth-page">
+      <section className="auth-hero-banner" aria-label="Bienvenida a la página de inicio de sesión">
+        <div className="auth-hero-content">
+          <h1 className="auth-hero-title">Bienvenido de nuevo</h1>
+          <p className="auth-hero-desc">Accedé a tu cuenta para continuar con tu compra.</p>
+        </div>
+        <div className="auth-hero-img-container">
+          <img src="/img/banners/hero_intro_endframe__e6khcva4hkeq_large.jpg" alt="Macbook Banner" className="auth-hero-img" />
+        </div>
+      </section>
+      <form onSubmit={onSubmit} className="auth-card">
+        <header className="auth-header">
+          <h2 className="auth-title">Iniciar sesión</h2>
+          <p className="auth-subtext">Ingresá con tu correo y contraseña para continuar.</p>
+        </header>
 
-      <input
-        placeholder="Email"
-        value={email}                                         // Inputs controlados (patrón): el valor viene del estado
-        onChange={e => setEmail(e.target.value)}             // Inputs controlados (patrón): onChange actualiza el estado
-        required
-      />
-      <input
-        placeholder="Contraseña"
-        type="password"
-        value={password}                                      // Inputs controlados (patrón): el valor viene del estado
-        onChange={e => setPassword(e.target.value)}          // Inputs controlados (patrón): onChange actualiza el estado
-        required
-      />
+        <div className="auth-fields">
+          <div className="form-group input-group">
+            <span className="field-icon" aria-hidden>✉️</span>
+            <input
+              className="auth-input"
+              placeholder="Correo electrónico"
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+              autoComplete="email"
+            />
+          </div>
 
-      {error && <p className="error">{error}</p>}            // Renderizado condicional: muestra el mensaje de error si existe
-      <button>Entrar</button>
+          <div className="form-group input-group">
+            <span className="field-icon" aria-hidden>🔒</span>
+            <input
+              className="auth-input"
+              placeholder="Contraseña"
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+              autoComplete="current-password"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(s => !s)}
+              className="toggle-visibility"
+              aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+            >
+              {showPassword ? '🙈' : '👁️'}
+            </button>
+          </div>
+        </div>
 
-      {!isAdmin && (                                         // Renderizado condicional: muestra el enlace a registro solo en modo usuario
-        <p>¿No tenés cuenta? <Link className="register-link" to="/register">Registrate</Link></p>
-      )}
+        {error && <p className="auth-error">{error}</p>}
 
-      <p
-        onClick={() => setIsAdmin(!isAdmin)}                  // Toggle: invierte el flag isAdmin (usa useState)
-        className="change-link"
-      >
-        {isAdmin ? "← Volver al login de usuario" : "Login de administrador"}
-      </p>
-    </form>
+        <div className="auth-actions">
+          <a href="#" className="auth-link">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" className="btn-primary btn-block">Iniciar sesión</button>
+
+        <div className="auth-footer">
+          ¿No tienes cuenta?{' '}
+          <Link to="/register" className="auth-link">Regístrate ahora</Link>
+        </div>
+      </form>
+    </div>
   )
 }

@@ -1,49 +1,115 @@
 import React, { useEffect, useState } from 'react'
-import { listProducts, listCategories } from '@/services/api.js'
+import Banners from '@/components/Banners.jsx'
+import { useNavigate } from 'react-router-dom'
+import { listProducts, listCategories, getProduct } from '@/services/api.js'
+import { useFilters } from '@/contexts/FiltersContext.jsx'
+import { useCart } from '@/contexts/CartContext.jsx'
 import ProductCard from '@/components/ProductCard.jsx'
-import CategoryFilter from '@/components/CategoryFilter.jsx'
+import '@/assets/Home.css'
 
-export default function Home(){
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+export default function Home() {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
-  const [q, setQ] = useState('')
-  const [categoryId, setCategoryId] = useState('')
-  const [order, setOrder] = useState('asc')
+  const [loading, setLoading] = useState(true)
+  const { q, categoryId, order, setCategoryId, sortBy, setSortBy, setOrder } = useFilters()
+  const { addItem } = useCart()
+  const navigate = useNavigate()
+
+  const normalize = (str) =>
+    (str || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '') // quitar acentos
+      .replace(/\s+/g, '') // quitar espacios
+      .trim()
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [cats, prods] = await Promise.all([
-          listCategories(),
-          listProducts({ _sort:'name', _order:order, name_like:q || undefined, categoryId: categoryId || undefined })
-        ])
-        setCategories(cats); setProducts(prods)
-      } catch (e){ setError('No se pudieron cargar datos') }
-      finally { setLoading(false) }
-    }
-    fetchData()
-  }, [q, categoryId, order])
+    setLoading(true)
+    const params = { _sort: sortBy || 'name', _order: order }
+    const query = (q || '').trim()
+    if (query) params.name_like = query // hint al server, pero no dependemos 100% de esto
+    if (categoryId) params.categoryId = Number(categoryId)
+    listProducts(params)
+      .then((data) => {
+        if (!query) return data
+        const qn = normalize(query)
+        return data.filter((p) => normalize(p.name).includes(qn))
+      })
+      .then(setProducts)
+      .finally(() => setLoading(false))
+  }, [q, categoryId, order, sortBy])
 
-  if (loading) return <p>Cargando...</p>
-  if (error) return <p>{error}</p>
+  useEffect(() => {
+    listCategories().then(setCategories).catch(() => setCategories([]))
+  }, [])
+
+  const handleBuyNow = async () => {
+    try {
+      const prod = await getProduct('3')
+      if (prod) {
+        addItem(prod, 1)
+        navigate('/cart')
+      }
+    } catch (_) {
+      // fail-silent
+    }
+  }
 
   return (
-    <section>
-      <header className="row">
-        <input placeholder="Buscar..." value={q} onChange={e=>setQ(e.target.value)} />
-        <CategoryFilter categories={categories} value={categoryId} onChange={setCategoryId} />
-        <select value={order} onChange={e=>setOrder(e.target.value)}>
-          <option value="asc">A → Z</option>
-          <option value="desc">Z → A</option>
-        </select>
-      </header>
-      {products.length === 0 ? <p>Sin resultados</p> : (
-        <div className="grid">
-          {products.map(p => <ProductCard key={p.id} product={p} />)}
+    <section className="apple-section">
+      <Banners categoryId={categoryId || '1'} onBuy={handleBuyNow} />
+
+      {/* Scrollbar de categorías alineada con la grilla (columna derecha) */}
+      <div className="apple-categories-container">
+        <div className="apple-categories-spacer" />
+        <div className="apple-categories-scroll">
+          <button
+            className="apple-category-btn"
+            onClick={() => setCategoryId('')}
+            style={{ fontWeight: !categoryId ? 700 : 500 }}
+            aria-current={!categoryId ? 'true' : undefined}
+          >
+            Todas
+          </button>
+          {categories.map(cat => (
+            <button
+              key={cat.id}
+              className="apple-category-btn"
+              onClick={() => setCategoryId(String(cat.id))}
+              style={{ fontWeight: String(categoryId) === String(cat.id) ? 700 : 500 }}
+              aria-current={String(categoryId) === String(cat.id) ? 'true' : undefined}
+            >
+              {cat.name}
+            </button>
+          ))}
         </div>
-      )}
+      </div>
+
+      {/* Contenido con sidebar izquierda para ordenación y grilla a la derecha */}
+      <div className="apple-content">
+        <aside className="apple-sort-sidebar" aria-label="Opciones de orden">
+          <div className="apple-sort-group">
+            <label htmlFor="sortby-select" className="apple-sort-label">Ordenar por:</label>
+            <select id="sortby-select" value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="apple-sort-select">
+              <option value="name">Nombre</option>
+              <option value="price">Precio</option>
+            </select>
+          </div>
+          <div className="apple-sort-group">
+            <label htmlFor="order-select" className="apple-sort-label">Dirección:</label>
+            <select id="order-select" value={order} onChange={(e) => setOrder(e.target.value)} className="apple-sort-select">
+              <option value="asc">A-Z / Menor</option>
+              <option value="desc">Z-A / Mayor</option>
+            </select>
+          </div>
+        </aside>
+
+        <div className="apple-products-grid">
+          {loading ? <p>Cargando productos...</p> : products.map((prod) => (
+            <ProductCard key={prod.id} product={prod} />
+          ))}
+        </div>
+      </div>
     </section>
   )
 }
