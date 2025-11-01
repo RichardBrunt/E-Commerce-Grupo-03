@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,9 @@ import grupo03.e_commerceback.dto.ItemPedidoDto;
 import grupo03.e_commerceback.dto.PedidoDto;
 import grupo03.e_commerceback.modelo.ItemsPedido;
 import grupo03.e_commerceback.modelo.Pedidos;
+import grupo03.e_commerceback.modelo.Usuarios;
+import grupo03.e_commerceback.modelo.Direccion;
+import grupo03.e_commerceback.modelo.carritos;
 import grupo03.e_commerceback.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 
@@ -50,6 +55,31 @@ public class PedidoController {
         List<ItemsPedido> items = (List<ItemsPedido>) pedidoService.listarItems(id);
         List<ItemPedidoDto> dtos = items.stream().map(this::toItemDto).collect(Collectors.toList());
         return ResponseEntity.ok(dtos);
+    }
+
+    @PostMapping
+    public ResponseEntity<PedidoDto> crear(@RequestBody PedidoDto dto) {
+        Pedidos p = new Pedidos();
+        Usuarios u = new Usuarios();
+        u.setId_Usuarios(dto.usuarioId());
+        p.setUsuario(u);
+
+        if (dto.direccionId() != null) {
+            Direccion d = new Direccion();
+            d.setId_Direccion(dto.direccionId());
+            p.setDireccion(d);
+        }
+
+        if (dto.carritoId() != null) {
+            carritos c = new carritos();
+            c.setId_carrito(dto.carritoId());
+            p.setCarrito(c);
+        }
+
+        p.setEstado_Pedido(Pedidos.EstadoPedido.valueOf(dto.estado()));
+        p.setTotal(dto.total());
+        Pedidos guardado = pedidoService.guardar(p);
+        return ResponseEntity.ok(toDtoSinItems(guardado));
     }
 
     private PedidoDto toDtoSinItems(Pedidos p) {

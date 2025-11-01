@@ -9,4 +9,8 @@ public record ProductoDto(
         String imagenUrl,
         Long categoriaId,
         Long modeloId
-) {}
+) {
+
+    public String nombre() {
+        throw new UnsupportedOperationException("Unimplemented method 'nombre'");
+    }}

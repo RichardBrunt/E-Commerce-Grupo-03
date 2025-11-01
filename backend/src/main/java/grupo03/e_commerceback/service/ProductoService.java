@@ -52,4 +52,14 @@ public class ProductoService {
     public void incrementarStock(Long idProducto, int cantidad) {
         productoRepository.incrementarStock(idProducto, cantidad);
     }
+
+    @Transactional
+    public productos guardar(productos producto) {
+        return productoRepository.save(producto);
+    }
+
+    @Transactional
+    public void eliminar(Long id) {
+        productoRepository.deleteById(id);
+    }
 }
