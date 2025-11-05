@@ -10,6 +10,8 @@ import dto.RegisterRequest;
 import modelo.Usuarios;
 import repository.UsuarioRepository;
 import security.JwtUtil;
+import errors.ConflictException;
+import errors.BadRequestException;
 
 @Service
 public class AuthService {
@@ -29,7 +31,7 @@ public class AuthService {
     @Transactional
     public String registerAndIssueToken(RegisterRequest req) {
         if (usuarioRepository.existsByEmail(req.getEmail())) {
-            throw new IllegalStateException("El email ya está registrado");
+            throw new ConflictException("El email ya está registrado");
         }
         Usuarios u = new Usuarios();
         u.setNombre(req.getNombre());
@@ -45,9 +47,9 @@ public class AuthService {
      */
     public String loginAndIssueToken(String email, String rawPassword) {
         Usuarios u = usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("Credenciales inválidas"));
+                .orElseThrow(() -> new BadRequestException("Credenciales inválidas"));
         if (!passwordEncoder.matches(rawPassword, u.getPassword())) {
-            throw new IllegalArgumentException("Credenciales inválidas");
+            throw new BadRequestException("Credenciales inválidas");
         }
         return jwt.generateToken(u.getEmail(), List.of(u.getRol()));
     }

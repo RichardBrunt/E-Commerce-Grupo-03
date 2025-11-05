@@ -1,0 +1,85 @@
+Clase 12: Despliegues de aplicaciones, Containerización
+=======================================================
+
+
+1. ¿Qué es el Despliegue de Aplicaciones?
+El despliegue (o deployment) de una aplicación es el proceso de poner una aplicación en producción, es llevar nuestro código de desarrollo a un servidor donde puede ser ejecutado 24/7 y accesible desde cualquier lugar con conexión a internet.
+
+Hacer su software accesible y funcional para el mundo.
+e-commerce: Pasar de correr npm start y el main de Spring Boot en su laptop, a tener su tienda online funcionando permanentemente en la nube, lista para recibir clientes de cualquier parte.
+
+1.2. Desafíos del Despliegue "Antiguo"
+Históricamente, el despliegue era un proceso tedioso y propenso a errores. Implicaba configurar manualmente servidores, instalar dependencias, manejar versiones de software, etc. Cada entorno (desarrollo, testing, producción) podía tener diferencias sutiles que causaban que la aplicación funcionara en uno pero no en otro. "en mi maquina funcionaba"
+
+E-commerce: Si su backend necesita Java 17, pero el servidor tiene Java 11, la API no levanta. 
+
+
+2. Empaquetado de Aplicaciones Java: JAR vs. WAR 
+2.1. Concepto de Empaquetado
+El empaquetado es el proceso de agrupar todos los archivos necesarios para que una aplicación Java se ejecute (código compilado, librerías, recursos, configuraciones) en un único archivo distribuible.
+Nos permite mover nuestra aplicación como una "unidad" y ejecutarla en cualquier lugar con un Java Runtime Environment (JRE).
+En Java, estos paquetes son archivos .jar o .war. Simplificar la distribución y ejecución de su aplicación Java.
+
+2.2. Archivos JAR (Java Archive)
+Un archivo .jar es un formato de archivo basado en el formato ZIP, utilizado para agregar clases Java, metadatos y recursos (imágenes, archivos de configuración, etc.) en un solo archivo para distribuir aplicaciones. Son el formato estándar para la mayoría de las aplicaciones Java
+
+E-commerce: Cuando compilan su backend de Spring Boot (con mvn clean install), el archivo ecommerce-backend.jar que se genera en la carpeta target/ es este JAR ejecutable. Pueden correrlo directamente con java -jar ecommerce-backend.jar y su API levantará sin necesidad de instalar nada más que Java. Incluye el servirdor tomcat
+
+2.3. Archivos WAR (Web Application Archive)
+Un WAR es similar a un JAR, pero está diseñado para aplicaciones web que se despliegan en un servidor de aplicaciones externo (como un Tomcat ya instalado y corriendo por separado). El WAR no incluye su propio servidor.
+
+Hoy en día se usa jar. Los WARs se usan más en proyectos Java tradicionales o en empresas con grandes servidores de aplicaciones ya configurados. 
+
+
+2.4 Containerización Jar vs War 
+El JAR ejecutable encaja perfectamente con el modelo de contenedores. Tu Dockerfile es increíblemente simple: solo necesitas una imagen base de JRE, copiar el JAR, y definir el comando para ejecutarlo. El contenedor se vuelve una unidad completamente autónoma.
+
+Con un .war: Aunque puedes contenerizar un WAR, es más engorroso. Tu Dockerfile tendría que incluir la instalación y configuración de un servidor de aplicaciones como Tomcat dentro del contenedor, y luego copiar el WAR a la ubicación adecuada. Esto hace que la imagen sea más grande y el contenedor tenga más procesos en ejecución (Tomcat + tu aplicación).
+
+
+3. Containerización 
+3.1. La Containerización
+La containerización empaqueta su aplicación y todas sus dependencias (sistema operativo base, librerías, configuraciones, incluso el JRE para su Spring Boot) en una unidad aislada y portátil llamada contenedor. Este contenedor se ejecuta de forma idéntica en cualquier lugar que tenga Docker.
+Función: Garantizar que su aplicación se ejecute siempre de la misma manera, sin importar dónde la desplieguen.
+E-commerce: No más problemas con versiones de Java o librerías faltantes. Su backend de Spring Boot y su frontend de React llevarán todo lo que necesitan en su contenedor.
+
+¿Por qué es tan útil?
+Portabilidad: Los contenedores pueden ejecutarse en cualquier máquina con un motor de contenedores (como Docker) instalado, sin importar el sistema operativo
+Eficiencia: Al compartir el sistema operativo del host, los contenedores son más ligeros y se inician más rápido que las máquinas virtuales tradicionales.
+Escalabilidad: Puedes crear y destruir contenedores rápidamente, lo que facilita escalar tus aplicaciones según la demanda.
+Aislamiento: Cada contenedor es un entorno aislado, 
+
+
+
+3.2. Contenedores vs. Máquinas Virtuales (VMs)
+En la infraestructura de software, Máquinas Virtuales (VMs) y Contenedores son tecnologías de aislamiento, pero con enfoques muy distintos en su arquitectura y eficiencia.
+
+Máquinas Virtuales (VMs)
+Son Emulaciones de un sistema de hardware completo. Cada VM corre su propio Sistema Operativo Invitado sobre un Hypervisor (ej. VMware ESXi, VirtualBox).
+	Aislamiento Fuerte: Cada VM es un entorno totalmente independiente.
+	Pesadas: Incluyen un SO completo por VM (gigabytes).
+	Lentas: Tardan minutos en arrancar.
+	Alto Consumo de Recursos: Cada OS consume CPU, RAM, disco.
+	
+Contenedores (Docker)
+Paquetes ligeros y ejecutables que incluyen solo la aplicación y sus dependencias. Comparten el kernel del Sistema Operativo Host a través de un Motor de Contenedores (ej. Docker Engine).
+	Aislamiento Ligero: A nivel de proceso, compartiendo el kernel.
+	Ligeros: Solo app + deps (megabytes).
+	Rápidos: Arrancan en segundos o milisegundos.
+	Bajo Consumo de Recursos: Comparten el kernel, mucho más eficientes.
+	Portabilidad Extrema: "Build once, run anywhere" (Construye una vez, corre en cualquier lugar con Docker).
+	
+	
+	
+3.3. Docker: 
+Docker es la plataforma de código abierto que nos permite crear, enviar y ejecutar estos contenedores. 
+
+3.4. Dockerfile: 
+Un Dockerfile es un archivo de texto simple con instrucciones paso a paso para construir una imagen Docker. Cada instrucción crea una "capa" en la imagen, lo que las hace eficientes.
+Automatizar la construcción de imágenes de forma reproducible.
+
+3.5. Imágenes Docker: 
+Una imagen Docker es como la "plantilla" de su contenedor. Es de solo lectura. Una vez creada, no cambia. Si hay un cambio en su código, crean una nueva imagen con una nueva versión.
+
+3.6. Ejecutando Contenedores con Docker CLI
+Explicación: Un contenedor es una instancia en ejecución de una imagen Docker.

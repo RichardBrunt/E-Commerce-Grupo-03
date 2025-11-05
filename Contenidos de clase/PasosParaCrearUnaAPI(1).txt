@@ -1,0 +1,27 @@
+Pasos crear una API: 
+======================
+
+Ejemplo Autores y Libros: un autor tiene muchos libros 1 a  n
+Levantar la Base de Datos MySql
+verificar que esté creada la db ecommerce_db
+
+
+
+Crear la Entity
+Autor
+Libro
+
+
+Crear el Controller: 
+/api/autores
+Con los métodos Get getAll, Get getAutorById, Post save, Put update, Delete delete
+AutorController
+
+Crear el Servicio:
+Con los métodos  getAll,  getAutorById, save,  update,  delete
+AutorService
+
+Crear el Repository:
+extender de JPARepository
+AutorRepository
+

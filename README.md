@@ -29,6 +29,38 @@ Backend en Spring Boot con JWT para autenticación, gestión de usuarios y direc
 java -jar target/e_commerce-0.0.1-SNAPSHOT.jar
 ```
 
+## Docker 🐳
+
+Opciones:
+
+- Ejecutar todo con docker-compose (MySQL + backend):
+
+```bash
+docker compose up --build
+```
+
+Esto levanta:
+- MySQL (puerto host 3307 → contenedor 3306)
+- Backend (puerto 8080)
+
+Variables relevantes que puedes sobreescribir (servicio `app`):
+- `SPRING_PROFILES_ACTIVE=mysql`
+- `DB_HOST=mysql`
+- `DB_PORT=3306`
+- `DB_USERNAME=ecommerce`
+- `DB_PASSWORD=ecommerce`
+
+También puedes construir la imagen del backend directamente:
+
+```bash
+docker build -t ecommerce-backend:local .
+docker run --rm -p 8080:8080 \
+  -e SPRING_PROFILES_ACTIVE=mysql \
+  -e DB_HOST=host.docker.internal -e DB_PORT=3307 \
+  -e DB_USERNAME=root -e DB_PASSWORD=root \
+  ecommerce-backend:local
+```
+
 ## Seguridad (resumen)
 - Stateless JWT; se inyecta por header `Authorization: Bearer <token>`.
 - Roles en claim `roles` (valores: `USER`, `ADMIN`).
@@ -41,6 +73,11 @@ java -jar target/e_commerce-0.0.1-SNAPSHOT.jar
 - ADMIN requerido:
   - `POST/PUT/DELETE /api/categorias/**`
   - `POST/PUT/DELETE /api/productos/**`
+
+## CORS
+- Habilitado globalmente en `SecurityConfig` con un `CorsConfigurationSource`.
+- Configurable vía propiedades en `application.properties` (prefijo `cors.*`).
+- Por defecto permite orígenes `http://localhost:3000` y `http://localhost:5173`.
 
 ## Endpoints principales
 
@@ -122,6 +159,13 @@ Cómo verificar en la DB: la columna `password` comienza con `$2a$`/`$2b$` y no 
 - 401/403: sin token o sin rol requerido.
 - 409: email duplicado / conflictos de integridad.
 - 400: validaciones (body inválido o campos faltantes).
+
+### Manejo de errores (custom)
+- 400 → `BadRequestException`
+- 404 → `NotFoundException`
+- 409 → `ConflictException`
+
+Todas mapeadas por `ApiExceptionHandler` con cuerpo `{ "error": "mensaje" }`.
 
 ## Notas
 - Puerto por defecto: 8080.

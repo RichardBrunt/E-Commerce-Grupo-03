@@ -1,0 +1,274 @@
+Clase 10: Persistencia Java, Spring Boot  
+Proyecto de referencia: E-commerce con React + Spring Boot (API REST básica para productos).
+Persistencia. 
+Bases de datos. 
+ORM. 
+Hibernate. 
+DAO, DTO. 
+Spring Data JPA. Exceptions.
+
+Controller: ProductoController.java
+===================================
+En el contexto de una arquitectura REST y siguiendo el principio de responsabilidad única (SRP - Single Responsibility Principle Principio de responsabilidad única), un Controller como este debe tener las siguientes responsabilidades únicamente:
+
+Manejo de endpoints HTTP:
+	Definir las rutas (@RequestMapping, @GetMapping, etc.)
+	Especificar los métodos HTTP (GET, POST, PUT, DELETE)
+	Manejar los parámetros de las URLs (@PathVariable)
+
+Transformación de datos:
+	Recibir las solicitudes HTTP (@RequestBody)
+	Convertir los datos de entrada en objetos del dominio
+	Transformar las respuestas del servicio en respuestas HTTP
+
+Control de respuestas HTTP:
+	Devolver los códigos de estado HTTP apropiados (200, 201, 404, etc.)
+	Manejar los headers de respuesta cuando sea necesario
+	Estructurar el formato de respuesta
+
+Lo que NO debería hacer un Controller:
+	Implementar lógica de negocio (eso va en el Service)
+	Acceder directamente a la base de datos (eso va en el Repository)
+	Realizar validaciones complejas (eso va en el Service)
+	Manejar transacciones (eso va en el Service)
+
+
+Servicio: ProductoService.java
+==============================
+La anotación @Transactional es importante en los servicios de Spring Boot por las siguientes razones:
+Garantiza la integridad de los datos: Asegura que todas las operaciones de base de datos dentro de un método se ejecuten como una única unidad de trabajo. Si algo falla, se hace un rollback de todas las operaciones.
+Manejo de concurrencia: Ayuda a manejar el acceso concurrente a los datos, evitando problemas cuando múltiples usuarios intentan modificar los mismos registros.
+Consistencia: Asegura que la base de datos permanezca en un estado consistente incluso si ocurren errores durante la ejecución de las operaciones.
+
+1. Persistencia 
+Subtemas:  
+- ¿Qué es la persistencia?  
+  - Definición: Almacenamiento duradero de datos (sobrevive a reinicios de la aplicación).  
+  - Importancia: Sin persistencia, los datos se perderían al detener el servidor.  
+
+- Persistencia en Spring Boot  
+  - Spring Boot simplifica la configuración y gestión de conexiones a bases de datos mediante:
+		Auto-configuración: Detecta dependencias en el pom.xml (ej: spring-boot-starter-data-jpa, mysql-connector-j) y configura automáticamente los beans necesarios 
+			DataSource: 
+				Configuración centralizada (se define en application.properties).
+				Integración con transacciones (trabaja con @Transactional).
+				Abstrae los detalles de conexión a la base de datos (URL, usuario, contraseña). 
+				
+				Ejemplo en Spring Boot:
+
+				# Configuración del DataSource (application.properties)  
+				spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce_db  
+				spring.datasource.username=root  
+				spring.datasource.password=secret  
+				spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver  
+
+				Spring Boot crea automáticamente un DataSource inyectable:
+				@Autowired  
+				private DataSource dataSource; // Inyectado por Spring  
+				// Ejemplo: Obtener una conexión (usar solo si es necesario)  
+				Connection conexion = dataSource.getConnection();  
+				
+				
+			EntityManager
+				Realiza operaciones CRUD sin escribir SQL manual 
+		
+1.1 Persistencia con MySQL 
+¿Por qué migrar de H2 a MySQL?
+	H2 es una base de datos en memoria (ideal para pruebas, no para producción).
+	MySQL es una base de datos relacional persistente, escalable y ampliamente usada en entornos reales.
+	
+	
+1.1.1 ¿Por qué instalar Xampp?
+Puntos clave a favor:
+	Instalación fácil y rápida
+	Gratuito y multiplataforma
+	phpMyAdmin integrado: cliente db
+	Fácil de usar y configurar
+	Ideal para aprendizaje y desarrollo: 
+	
+Consideraciones importantes:
+	No recomendado para producción: no es segura para servidores públicos.
+	Configuración avanzada: Puede requerir ajustes manuales para escenarios más complejos.
+
+
+Instalación:
+	windows	
+	https://www.apachefriends.org/es/download.html	
+
+	ubuntu
+	sudo apt install mysql-server
+	
+	fedora
+	sudo dnf install mysql-server
+
+	windows 
+	choco install mysql-server
+
+	o con docker cliente workbench
+	docker desplegar o instalar mysql server
+	docker run --name mysql_server_dev -d -p 3306:3306 mysql:8.0
+	installar workbench
+	https://www.mysql.com/products/workbench/
+	
+Configurar proyecto con mysql:
+	ConfiguracionMysql-app.properties
+	application.properties
+	verificar driver en pom.xml 
+	
+Probar mysql:
+	Crear la base de datos ecommerce_db en MySQL 
+	Levantar el proyecto 
+		verificar la creación de la tabla productos con los atributos del entity
+		verificar las configuraciones id, pk
+	Ejecutar API's 
+		verificar sql formateada en terminal
+		verificar insert, delete
+		agregar campo, verificar en db 
+		
+	
+Antes:
+	debiamos crear la db, tablas, campos y config 
+	configurar mysql, descargar el driver, etc 
+	crear la conexión y llamarla cada vez que la utilizabamos
+
+1.2 Crear estructura típica de un e-commerce 
+	DB-ecommerce.JPG
+	levantar proyecto 
+	verificar relaciones en db 
+	
+
+
+2. Bases de Datos 
+Subtemas:  
+- Tipos de bases de datos:  
+  - Relacionales (MySQL, PostgreSQL) vs. NoSQL (MongoDB).  
+  
+	Tablas Relacionales: Ideales para datos estructurados con esquemas fijos, relaciones complejas e integridad crítica. Ofrecen consultas potentes con SQL y transacciones ACID ( Atomicidad, Consistencia, Aislamiento y Durabilidad,). Maduras y con un amplio ecosistema.
+	MySQL, PostgreSQL, SQL Server, Oracle, MariaDB
+
+	Tablas NoSQL: Adecuadas para datos no estructurados o semiestructurados con esquemas flexibles (mails, videos, audio). 
+	MongoDB, Cassandra, Redis
+	Tipos principales:
+		Clave-Valor: Almacenan datos como pares clave-valor (ej: Redis, Memcached). Rápidas para búsquedas por clave.
+		Documento: Almacenan datos en documentos (como JSON) con esquemas flexibles (ej: MongoDB, Couchbase).
+		Columna Ancha: Almacenan datos en familias de columnas, optimizadas para grandes volúmenes y consultas por columnas (ej: Cassandra, HBase).
+		Grafo: Almacenan datos como nodos y relaciones, ideales para analizar conexiones complejas (ej: Neo4j).
+  
+
+
+3. ORM (Object-Relational Mapping) 
+- ¿Qué es un ORM?  
+	mapea los objetos de tu código (Java.) a las tablas de una base de datos relacional. 
+	permite interactuar con la base de datos utilizando POO, sin tener que escribir directamente código SQL 
+	Python: Django ORM
+	Java: Hibernate, JPA (Java Persistence API - especificación que Hibernate implementa)
+	PHP: Eloquent 
+	 
+	Ejemplo: La clase Producto en Java se convierte en la tabla productos.  
+	
+- Ventajas del ORM:  
+  - Evita escribir SQL manual (ej: INSERT INTO productos...).  
+
+
+4. Hibernate 
+framework ORM para Java. 
+Su función principal es simplificar la interacción entre tu código Java orientado a objetos y las bases de datos relacionales.
+
+@Entity, @Table, @Id, @GeneratedValue, @Column
+@OneToOne, @ManyToOne, @OneToMany, @ManyToMany, y @JoinColumn, @JoinTable. 
+
+
+4.1 Hibernate y JPA es un estándar: 
+JPA define un conjunto de interfaces y reglas sobre cómo los objetos Java deben ser persistidos en bases de datos relacionales. Es como un contrato que deben seguir las implementaciones.
+Hibernate es un ejecutor del contrato: Es un framework ORM (Object-Relational Mapping) popular y robusto para Java que implementa la especificación JPA.
+
+
+
+5. DAO y DTO 
+Son patrones de diseño: un patrón una solución a un problema común en el desarrollo de software.
+
+- Patrón DAO (Data Access Object):  
+  Capa intermedia entre la lógica de negocio y la base de datos.  
+  ProductoDAO.java allí se colocaban todas las consultas, upd, del, a la tabla producto.
+  Con Springboot en lugar de crear DAOs manualmente, defines interfaces de repositorio que extienden JpaRepository
+  Con Spring Data JPA, generalmente no necesitamos implementar el patrón DAO de forma manual.
+
+- Patrón DTO (Data Transfer Object):  
+	DTO (Data Transfer Object) es como un "paquete de datos" que usamos para enviar información entre partes de nuestra aplicación (ej: entre el backend y el frontend). 
+	Su objetivo es:
+		Evitar enviar datos innecesarios (ej: contraseñas, IDs internos).
+		Simplificar la estructura de los datos que viajan por la red.
+		Adaptar los datos para que sean fáciles de usar por quien los recibe.  
+  
+	Crear un dto por endpoint:Principio de Responsabilidad Única (SRP):
+		Cada DTO maneja exactamente los datos necesarios para su operación
+		Evita campos innecesarios o no utilizados
+		Hace el código más mantenible
+
+
+6. Spring Data JPA (30 minutos)  
+Subtemas:  
+- Repositorios JPA:  
+  - Interfaces que heredan de JpaRepository para operaciones CRUD automáticas.  
+  - Ejemplo:  ProductoRepository.java
+   
+
+- Query Methods:  
+  - Crear consultas personalizadas sin escribir SQL.  
+  - Demo: ProductoRepository.java
+
+- Integración con el Service:  
+  - Reemplazar el DAO manual por el repositorio de Spring Data JPA.  
+
+
+
+7. Exceptions 
+Subtemas:  
+- Tipos de excepciones:  
+  - Checked (ej: SQLException) vs. Unchecked (ej: DataAccessException).  
+
+- Manejo en Spring Boot:  
+  - Uso de @ControllerAdvice para manejo global.  
+  - Ejemplo: Crear ProductoNotFoundException para cuando no exista un producto:  
+    java
+    @ResponseStatus(code = HttpStatus.NOT_FOUND)
+    public class ProductoNotFoundException extends RuntimeException {
+        public ProductoNotFoundException(Long id) {
+            super("Producto con ID " + id + " no encontrado");
+        }
+    }
+    
+8- Práctica en el proyecto:  
+  - Lanzar excepciones al buscar un producto por ID inexistente y capturarlas en el controlador.  
+
+
+Ejercicio Integrador 
+- Modificar el proyecto e-commerce para:  
+  1. Agregar persistencia con Hibernate y Spring Data JPA.  
+  2. Implementar DTOs para las respuestas de la API.  
+  3. Manejar errores como ProductoNotFoundException de forma centralizada.  
+
+Ejemplo de entrega esperada:  
+- Un endpoint /api/productos que devuelva datos desde la base de datos usando DTOs.  
+- Pruebas con Postman para validar el flujo completo (crear, leer, actualizar, eliminar).  
+
+
+
+Material Adicional:  
+- Repositorio GitHub con código de ejemplo (entidades, repositorios, DTOs).  
+- Enlaces a la documentación de Spring Data JPA y Hibernate.
+
+
+Laboratorio: 
+===============
+tienen 15 para desarrollarlo
+10 min duración
+Luego presentan en la reunión general el trabajo
+
+Consigna
+crear dos tablas con datos básicos que persinstan en la db 
+lombok 
+entity 
+crear una relación entre las dos tablas OneToMany 
+levantar el proyecto spring boot y visualizar los cambios en mysql
+probar los endpoints 

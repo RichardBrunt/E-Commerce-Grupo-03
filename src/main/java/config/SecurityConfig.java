@@ -12,6 +12,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import security.JwtFilter;
 
@@ -30,6 +33,7 @@ public class SecurityConfig {
      */
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtFilter jwtFilter) throws Exception {
         http
+            .cors(cors -> {})
             .csrf(csrf -> csrf.disable())
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .exceptionHandling(e -> e
@@ -67,5 +71,19 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         // Encoder para contraseñas de usuarios (BCrypt como en clase)
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource(config.CorsProperties props) {
+        CorsConfiguration cfg = new CorsConfiguration();
+        if (props.getAllowedOrigins() != null) cfg.setAllowedOrigins(props.getAllowedOrigins());
+        if (props.getAllowedMethods() != null) cfg.setAllowedMethods(props.getAllowedMethods());
+        if (props.getAllowedHeaders() != null) cfg.setAllowedHeaders(props.getAllowedHeaders());
+        if (props.getExposedHeaders() != null) cfg.setExposedHeaders(props.getExposedHeaders());
+        cfg.setAllowCredentials(props.isAllowCredentials());
+        cfg.setMaxAge(props.getMaxAge());
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", cfg);
+        return source;
     }
 }

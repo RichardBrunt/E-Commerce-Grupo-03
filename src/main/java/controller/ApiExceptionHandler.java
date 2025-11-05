@@ -18,6 +18,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import errors.BadRequestException;
+import errors.ConflictException;
+import errors.NotFoundException;
+
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
@@ -26,6 +30,13 @@ public class ApiExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(Map.of("error", ex.getMessage()));
     }
+
+        // Custom 400
+        @ExceptionHandler(BadRequestException.class)
+        public ResponseEntity<?> handleBadRequestCustom(BadRequestException ex) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                .body(Map.of("error", ex.getMessage()));
+        }
 
     // Método HTTP no soportado (p. ej. GET a un endpoint que es POST)
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
@@ -43,6 +54,20 @@ public class ApiExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(Map.of("error", ex.getMessage()));
     }
+
+        // Custom 409
+        @ExceptionHandler(ConflictException.class)
+        public ResponseEntity<?> handleConflictCustom(ConflictException ex) {
+                return ResponseEntity.status(HttpStatus.CONFLICT)
+                                .body(Map.of("error", ex.getMessage()));
+        }
+
+        // Custom 404
+        @ExceptionHandler(NotFoundException.class)
+        public ResponseEntity<?> handleNotFound(NotFoundException ex) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                .body(Map.of("error", ex.getMessage()));
+        }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<?> handleConstraintViolation(ConstraintViolationException ex) {
