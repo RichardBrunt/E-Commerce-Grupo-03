@@ -40,10 +40,10 @@ services:
       retries: 30
 
   frontend:
-    image: node:20-alpine
+    image: node:22-alpine
     working_dir: /app
     volumes:
-      - ./Frontend/frontend:/app
+      - ./frontend:/app
       - /app/node_modules
     environment:
       # Compilar cliente apuntando al backend público en localhost
