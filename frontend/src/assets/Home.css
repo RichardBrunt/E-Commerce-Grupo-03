@@ -1,0 +1,264 @@
+/* Home.css - Antes AppleSection.css. Inspirado en el estilo Apple y las cards adjuntas */
+
+.apple-section {
+  background: #F5F5F5;
+  min-height: 100vh;
+  width: 100vw;
+
+  /* --- HERO BANNER APPLE STYLE --- */
+  .apple-hero-banner {
+    width: 100vw;
+    min-height: 480px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0 0 2.5rem 0;
+    box-sizing: border-box;
+  }
+  .apple-hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 7vw;
+    z-index: 2;
+  }
+  .apple-hero-title {
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 1rem 0;
+    letter-spacing: -1px;
+  }
+  .apple-hero-desc {
+    font-size: 1.4rem;
+    color: #e0e0e0;
+    margin-bottom: 1.5rem;
+  }
+  .apple-hero-price-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .apple-hero-price {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .apple-hero-btn-main {
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 2rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 0.9rem 2.5rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 2px 8px #0002;
+  }
+  .apple-hero-btn-main:hover {
+    background: #FFD700;
+    color: #000;
+  }
+  .apple-hero-img-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    z-index: 1;
+  }
+  .apple-hero-img {
+    width: 540px;
+    max-width: 45vw;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    background: transparent;
+  }
+  @media (max-width: 900px) {
+    .apple-hero-banner {
+      flex-direction: column;
+      min-height: 320px;
+      padding: 0;
+    }
+    .apple-hero-content {
+      align-items: center;
+      padding: 2rem 1rem 1rem 1rem;
+      text-align: center;
+    }
+    .apple-hero-img {
+      width: 90vw;
+      max-width: 90vw;
+      margin: 0 auto 1.5rem auto;
+    }
+  }
+  margin: 0 0 0.5rem 0;
+}
+
+.apple-banner-price-row { display: flex; align-items: center; gap: 1.5rem; }
+.apple-banner-price { font-size: 2rem; font-weight: 700; color: #000; }
+
+/* Scrollbar de categorías */
+.apple-categories-scroll {
+  display: flex;
+  gap: 1.2rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  padding: 1.2rem 0 1.2rem 0;
+  margin: 0 0 1rem 0;
+  scrollbar-width: thin;
+  justify-content: flex-start;
+  width: 100%;
+}
+.apple-category-btn {
+  background: #fff;
+  color: #1A1A1A;
+  border: 1.5px solid #E0E0E0;
+  border-radius: 2rem;
+  padding: 0.7rem 2.2rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  outline: none;
+  white-space: nowrap;
+  scroll-snap-align: start;
+  user-select: none;
+}
+.apple-category-btn:hover, .apple-category-btn:focus {
+  background: #E0E0E0;
+  color: #000;
+  border: 1.5px solid #BDBDBD;
+}
+.apple-category-btn[aria-current="true"] {
+  background: #000;
+  color: #fff;
+  border-color: #FFD700;
+  box-shadow: 0 2px 10px #0002;
+}
+.apple-category-btn[aria-current="true"]:hover,
+.apple-category-btn[aria-current="true"]:focus {
+  background: #000;
+  color: #fff;
+  border-color: #FFD700;
+}
+.apple-categories-scroll::-webkit-scrollbar { height: 8px; }
+.apple-categories-scroll::-webkit-scrollbar-track { background: transparent; }
+.apple-categories-scroll::-webkit-scrollbar-thumb { background: #E0E0E0; border-radius: 8px; }
+.apple-categories-scroll::-webkit-scrollbar-thumb:hover { background: #BDBDBD; }
+
+/* Cards de productos */
+.apple-products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+  justify-items: center; /* centrar cards más estrechas */
+  margin: 0 auto;
+  max-width: 100%;
+  width: 100%;
+}
+.apple-card {
+  background: #fff;
+  border: 2px solid #E0E0E0;
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 12px #0001;
+  padding: 1.4rem 1.1rem 1.1rem 1.1rem;
+  width: 92%; /* un poco menos ancha para dejar aire entre cards */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  margin-bottom: 1.5rem;
+  transition: box-shadow 0.2s, border 0.2s;
+}
+.apple-card:hover { box-shadow: 0 6px 24px #0002; border: 2px solid #FFD700; }
+.apple-card-offer {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  background: #FFD700; color: #1A1A1A; font-weight: 700; font-size: 1rem;
+  border-radius: 0.7rem; padding: 0.4rem 1.1rem; z-index: 2;
+}
+.apple-card-img { width: 140px; height: 140px; object-fit: contain; margin-bottom: 1.2rem; }
+.apple-card-title { font-size: 1.25rem; font-weight: 700; margin: 0 0 0.5rem 0; color: #1A1A1A; text-align: center; }
+.apple-card-price-row { margin-bottom: 1.2rem; }
+.apple-card-price { font-size: 1.15rem; font-weight: 600; color: #000; }
+.apple-btn { border: none; border-radius: 1.2rem; font-size: 1.08rem; font-weight: 600; padding: 0.8rem 2.2rem; cursor: pointer; transition: background 0.2s, color 0.2s, opacity 0.2s; margin-top: 0.2rem; }
+.apple-btn-primary { background: #000; color: #fff; }
+.apple-btn-primary:hover { background: #FFD700; color: #1A1A1A; }
+.apple-btn-disabled { background: #E0E0E0; color: #888; cursor: not-allowed; opacity: 0.7; }
+  /* Variante compacta para botones (como Cerrar sesión) */
+  .apple-btn-compact { font-size: 0.9rem; padding: 0.45rem 1rem; border-radius: 0.9rem; }
+
+@media (max-width: 900px) {
+  .apple-section { width: 100vw; max-width: 100vw; padding: 0; }
+  .apple-banner { flex-direction: column; min-height: 220px; width: 100vw; max-width: 100vw; border-radius: 0; }
+  .apple-banner-img { width: 100vw; min-width: 0; max-height: 220px; }
+  .apple-banner-content { padding: 1.5rem; align-items: center; text-align: center; }
+  .apple-products-grid { flex-direction: column; align-items: center; gap: 2rem; width: 100vw; max-width: 100vw; }
+}
+
+/* Layout con sidebar izquierda para ordenación */
+.apple-content {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1.5rem;
+  max-width: 1400px;
+  padding: 0 1rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Contenedor de categorías usando el mismo grid de .apple-content */
+.apple-categories-container {
+  display: grid;
+  grid-template-columns: 220px 1fr; /* igual que .apple-content */
+  gap: 1.5rem;
+  max-width: 1400px;
+  padding: 0 1rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+  align-items: center;
+}
+/* .apple-categories-spacer: columna izquierda vacía para alinear */
+
+.apple-sort-sidebar {
+  background: #fff;
+  border: 1px solid #E0E0E0;
+  border-radius: 1rem;
+  padding: .8rem;
+  height: fit-content;
+  position: sticky;
+  top: 12px;
+}
+
+.apple-sort-group { display: grid; gap: .4rem; margin-bottom: .8rem; }
+.apple-sort-label { font-size: .95rem; font-weight: 700; color: #1A1A1A; }
+.apple-sort-select {
+  border: 1px solid #E0E0E0;
+  border-radius: .75rem;
+  padding: .5rem .6rem;
+  font-size: .95rem;
+  background: #fafafa;
+  color: #000; /* seleccionado en negro */
+}
+
+/* Responsive: sidebar arriba */
+@media (max-width: 1024px) {
+  .apple-content { grid-template-columns: 1fr; }
+  .apple-sort-sidebar { position: static; }
+  .apple-categories-container { grid-template-columns: 1fr; }
+}
+
+/* Ajustes de columnas de cards según viewport */
+@media (max-width: 1280px) {
+  .apple-products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .apple-products-grid { grid-template-columns: 1fr; }
+}

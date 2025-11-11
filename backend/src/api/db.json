@@ -1,0 +1,194 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "name": "Macbook"
+    },
+    {
+      "id": "2",
+      "name": "iPhone"
+    },
+    {
+      "id": "3",
+      "name": "iPad"
+    },
+    {
+      "id": "4",
+      "name": "Apple Watch"
+    },
+    {
+      "id": "5",
+      "name": "AirPods"
+    }
+  ],
+  "products": [
+    {
+      "id": "3",
+      "name": "MacBook Pro 14\"",
+      "categoryId": 1,
+      "price": 799999,
+      "stock": 6,
+      "image": "/img/products/MacbookPro3.jpg",
+      "images": [
+        "/img/products/MacbookPro3.jpg",
+        "/img/products/MacbookPro4.jpg"
+      ],
+      "description": "Rendimiento profesional para crear.",
+      "specs": {
+        "Chipset": "Apple M2 Pro",
+        "Pantalla": "14'' Liquid Retina",
+        "Resolución": "3024 x 1964",
+        "Memoria RAM": "16 GB",
+        "Almacenamiento": "512 GB SSD",
+        "Puertos": "USB-C/Thunderbolt, HDMI, Jack 3.5mm",
+        "Teclado": "Español retroiluminado",
+        "Audio": "6 parlantes",
+        "Sistema Operativo": "macOS",
+        "Dimensiones": "-",
+        "Peso": "-",
+        "Batería": "-",
+        "Cámara": "1080p",
+        "Conectividad": "WiFi 6, Bluetooth 5.3",
+        "Color": "Gris espacial"
+      }
+    },
+    {
+      "id": "4",
+      "name": "MacBook Pro 16\"",
+      "categoryId": 1,
+      "price": 1199999,
+      "stock": 2,
+      "image": "/img/products/MacbookPro2.jpg",
+      "images": [
+        "/img/products/MacbookPro2.jpg",
+        "/img/products/MacbookPro3.jpg",
+        "/img/products/MacbookPro4.jpg",
+        "/img/products/MacbookPro.jpg"
+      ],
+      "description": "Pantalla grande para pros.",
+      "specs": {
+        "Chipset": "Apple M2 Max",
+        "Pantalla": "16'' Liquid Retina",
+        "Resolución": "3456 x 2234",
+        "Memoria RAM": "32 GB",
+        "Almacenamiento": "1 TB SSD",
+        "Puertos": "USB-C/Thunderbolt, HDMI, Jack 3.5mm",
+        "Teclado": "Español retroiluminado",
+        "Audio": "6 parlantes",
+        "Sistema Operativo": "macOS",
+        "Dimensiones": "-",
+        "Peso": "-",
+        "Batería": "-",
+        "Cámara": "1080p",
+        "Conectividad": "WiFi 6, Bluetooth 5.3",
+        "Color": "Plata"
+      }
+    },
+    {
+      "id": "5",
+      "name": "iPhone 17",
+      "categoryId": 2,
+      "price": 899999,
+      "stock": 10,
+      "image": "/img/products/Iphone17.jpg",
+      "images": [
+        "/img/products/Iphone17.jpg"
+      ],
+      "description": "El nuevo iPhone con rendimiento de próxima generación.",
+      "specs": {
+        "Chipset": "Apple A18",
+        "Pantalla": "6.1'' OLED Super Retina XDR",
+        "Resolución": "2556 x 1179",
+        "Memoria RAM": "8 GB",
+        "Almacenamiento": "128 GB",
+        "Puertos": "USB-C",
+        "Teclado": "-",
+        "Audio": "Stereo speakers",
+        "Sistema Operativo": "iOS",
+        "Dimensiones": "-",
+        "Peso": "-",
+        "Batería": "-",
+        "Cámara": "Doble 48 MP + 12 MP",
+        "Conectividad": "5G, WiFi 6E, Bluetooth 5.3",
+        "Color": "Medianoche"
+      }
+    },
+    {
+      "id": "6",
+      "name": "iPhone 17 Pro",
+      "categoryId": 2,
+      "price": 1199999,
+      "stock": 6,
+      "image": "/img/products/Iphone 17pro.jpg",
+      "images": [
+        "/img/products/Iphone 17pro.jpg"
+      ],
+      "description": "Potencia profesional con cámara avanzada y materiales premium.",
+      "specs": {
+        "Chipset": "Apple A18 Pro",
+        "Pantalla": "6.3'' OLED ProMotion 120Hz",
+        "Resolución": "2622 x 1206",
+        "Memoria RAM": "8 GB",
+        "Almacenamiento": "256 GB",
+        "Puertos": "USB-C",
+        "Teclado": "-",
+        "Audio": "Stereo speakers",
+        "Sistema Operativo": "iOS",
+        "Dimensiones": "-",
+        "Peso": "-",
+        "Batería": "-",
+        "Cámara": "Triple 48 MP + 12 MP + 12 MP (tele)",
+        "Conectividad": "5G, WiFi 7, Bluetooth 5.3, UWB",
+        "Color": "Titanio natural"
+      }
+    },
+    {
+      "id": "7",
+      "name": "iPhone 16",
+      "categoryId": 2,
+      "price": 749999,
+      "stock": 12,
+      "image": "/img/products/Iphone16.jpg",
+      "images": [
+        "/img/products/Iphone16.jpg"
+      ],
+      "description": "Rendimiento equilibrado y gran autonomía.",
+      "specs": {
+        "Chipset": "Apple A17",
+        "Pantalla": "6.1'' OLED Super Retina XDR",
+        "Resolución": "2556 x 1179",
+        "Memoria RAM": "6 GB",
+        "Almacenamiento": "128 GB",
+        "Puertos": "USB-C",
+        "Teclado": "-",
+        "Audio": "Stereo speakers",
+        "Sistema Operativo": "iOS",
+        "Dimensiones": "-",
+        "Peso": "-",
+        "Batería": "-",
+        "Cámara": "Doble 48 MP + 12 MP",
+        "Conectividad": "5G, WiFi 6E, Bluetooth 5.3",
+        "Color": "Azul"
+      }
+    }
+  ],
+  "users": [
+    {
+      "id": "0080",
+      "usuario": "richard",
+      "nombre": "Richard",
+      "apellido": "Brunt",
+      "email": "brunt300@gmail.com",
+      "password": "123456",
+      "avatar": "https://encrypted-tbn3.gstatic.com/licensed-image?q=tbn:ANd9GcR9OeAMlzpleGjN1f2glIgO5roSDWp3VhklgVIJ_Hg78A3Gzimz4h113_ZKGnbedQnfM7OLvBwAcrst-GcQ6Tx_75pQI9hvwGAld6K0dYhzffQfhX3NS0lzuTivLs-63qEq73gmLBaXaOZ5"
+    },
+    {
+      "id": "5969",
+      "usuario": "richardbnt",
+      "nombre": "Richard",
+      "apellido": "Brunt",
+      "email": "rich123@gmail.com",
+      "password": "123456"
+    }
+  ]
+}
