@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import dto.DireccionDto;
 import dto.DireccionUpsertRequest;
 import dto.UsuarioDto;
+import dto.UsuarioUpdateRequest;
+import errors.BadRequestException;
+import errors.ConflictException;
 import modelo.Direccion;
 import modelo.Usuarios;
 import repository.DireccionRepository;
@@ -48,20 +51,39 @@ public class UserController {
         public ResponseEntity<UsuarioDto> updateMe(
                 Authentication auth,
                 @RequestParam(value = "nombre", required = false) String nombreQueryParam,
-                @RequestBody(required = false) java.util.Map<String, Object> body) {
+                @RequestBody(required = false) UsuarioUpdateRequest req) {
             Usuarios u = usuarioRepository.findByEmail(auth.getName())
                     .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado"));
 
-            String nombre = nombreQueryParam;
-            if (nombre == null && body != null) {
-                Object v = body.get("nombre");
-                if (v != null) nombre = String.valueOf(v);
-            }
-            if (nombre == null || nombre.isBlank()) {
-                throw new IllegalArgumentException("El nombre es requerido");
+            // Tomar valores del query param (compatibilidad) o del body (nuevo contrato)
+            String nuevoNombre = nombreQueryParam != null ? nombreQueryParam : (req != null ? req.nombre() : null);
+            String nuevoApellido = req != null ? req.apellido() : null;
+            String nuevoUsuario = req != null ? req.usuario() : null;
+            String nuevoEmail = req != null ? req.email() : null;
+            String nuevoAvatar = req != null ? req.avatar() : null;
+
+            // Si no se envió ningún campo, es un 400
+            if ((nuevoNombre == null || nuevoNombre.isBlank())
+                && (nuevoApellido == null || nuevoApellido.isBlank())
+                && (nuevoUsuario == null || nuevoUsuario.isBlank())
+                && (nuevoEmail == null || nuevoEmail.isBlank())
+                && (nuevoAvatar == null || nuevoAvatar.isBlank())) {
+                throw new BadRequestException("Debe enviar al menos un campo para actualizar (nombre, apellido, usuario, email o avatar)");
             }
 
-            u.setNombre(nombre);
+            if (nuevoNombre != null && !nuevoNombre.isBlank()) u.setNombre(nuevoNombre);
+            if (nuevoApellido != null && !nuevoApellido.isBlank()) u.setApellido(nuevoApellido);
+            if (nuevoUsuario != null && !nuevoUsuario.isBlank()) u.setUsuario(nuevoUsuario);
+
+            if (nuevoEmail != null && !nuevoEmail.isBlank()) {
+                if (!nuevoEmail.equalsIgnoreCase(u.getEmail()) && usuarioRepository.existsByEmail(nuevoEmail)) {
+                    throw new ConflictException("El email ya está registrado");
+                }
+                u.setEmail(nuevoEmail);
+            }
+
+            if (nuevoAvatar != null && !nuevoAvatar.isBlank()) u.setAvatar(nuevoAvatar);
+
             usuarioRepository.save(u);
             return ResponseEntity.ok(UsuarioDto.from(u));
         }

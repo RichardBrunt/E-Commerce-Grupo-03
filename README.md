@@ -31,35 +31,12 @@ java -jar target/e_commerce-0.0.1-SNAPSHOT.jar
 
 ## Docker 🐳
 
-Opciones:
+Para orquestar servicios (MySQL + Backend + Frontend) usa los archivos en la raíz del monorepo:
 
-- Ejecutar todo con docker-compose (MySQL + backend):
+- Desarrollo con hot reload (Vite): `docker-compose.yml`
+- Producción con Nginx: `docker-compose.prod.yml`
 
-```bash
-docker compose up --build
-```
-
-Esto levanta:
-- MySQL (puerto host 3307 → contenedor 3306)
-- Backend (puerto 8080)
-
-Variables relevantes que puedes sobreescribir (servicio `app`):
-- `SPRING_PROFILES_ACTIVE=mysql`
-- `DB_HOST=mysql`
-- `DB_PORT=3306`
-- `DB_USERNAME=ecommerce`
-- `DB_PASSWORD=ecommerce`
-
-También puedes construir la imagen del backend directamente:
-
-```bash
-docker build -t ecommerce-backend:local .
-docker run --rm -p 8080:8080 \
-  -e SPRING_PROFILES_ACTIVE=mysql \
-  -e DB_HOST=host.docker.internal -e DB_PORT=3307 \
-  -e DB_USERNAME=root -e DB_PASSWORD=root \
-  ecommerce-backend:local
-```
+Ver `README.md` en la raíz para instrucciones actualizadas.
 
 ## Seguridad (resumen)
 - Stateless JWT; se inyecta por header `Authorization: Bearer <token>`.

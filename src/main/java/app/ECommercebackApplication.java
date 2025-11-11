@@ -30,6 +30,9 @@ public class ECommercebackApplication {
     CommandLineRunner seedAdmin(UsuarioRepository repo, PasswordEncoder encoder,
                                 org.springframework.core.env.Environment env) {
         return args -> {
+            // Permitir desactivar el seed en entornos no-dev
+            boolean seedEnabled = env.getProperty("admin.seed.enabled", Boolean.class, true);
+            if (!seedEnabled) return;
             String email = env.getProperty("admin.email", "admin@example.com");
             String pass = env.getProperty("admin.password", "admin123");
             if (repo.findByEmail(email).isEmpty()) {

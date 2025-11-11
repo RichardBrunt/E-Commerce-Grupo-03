@@ -15,6 +15,12 @@ public class Usuarios {
     @Column(length = 100, nullable = false)
     private String nombre;
 
+    @Column(length = 100)
+    private String apellido;
+
+    @Column(length = 100)
+    private String usuario; // username visible en el front (no usado para login)
+
     @Column(length = 100, nullable = false, unique = true)
     private String email;
 
@@ -23,4 +29,10 @@ public class Usuarios {
 
     @Column(length = 20, nullable = false)
     private String rol; // USER o ADMIN
+
+    @Column(length = 300)
+    private String avatar; // URL de imagen de perfil
 }
+
+
+

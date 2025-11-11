@@ -28,6 +28,12 @@ public class ProductoController {
         return ResponseEntity.ok(productoService.listar(categoriaId, modeloId, pageable));
     }
 
+    // GET público por id
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductoDto> obtener(@PathVariable long id) {
+        return ResponseEntity.ok(productoService.obtener(id));
+    }
+
     // POST ADMIN: crear producto
     @PostMapping
     public ResponseEntity<ProductoDto> crear(@RequestBody @Valid ProductoUpsertRequest req) {

@@ -46,6 +46,8 @@ public class SecurityConfig {
                 // Catálogo público: permitir solo GET sin autenticación
                 .requestMatchers(HttpMethod.GET, "/api/categorias", "/api/categorias/**").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/productos", "/api/productos/**").permitAll()
+                // Actuator (salud) público para healthchecks de contenedor
+                .requestMatchers("/actuator/**").permitAll()
                 // Autenticación pública
                 .requestMatchers("/api/auth/**").permitAll()
                 // Usuarios: JWT requerido con rol USER o ADMIN
@@ -79,6 +81,7 @@ public class SecurityConfig {
         if (props.getAllowedOrigins() != null) cfg.setAllowedOrigins(props.getAllowedOrigins());
         if (props.getAllowedMethods() != null) cfg.setAllowedMethods(props.getAllowedMethods());
         if (props.getAllowedHeaders() != null) cfg.setAllowedHeaders(props.getAllowedHeaders());
+
         if (props.getExposedHeaders() != null) cfg.setExposedHeaders(props.getExposedHeaders());
         cfg.setAllowCredentials(props.isAllowCredentials());
         cfg.setMaxAge(props.getMaxAge());

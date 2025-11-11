@@ -43,6 +43,14 @@ public class ProductoServiceImpl implements ProductoService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public ProductoDto obtener(long id) {
+        Producto p = productoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Producto no encontrado"));
+        return ProductoDto.from(p);
+    }
+
+    @Override
     @Transactional
     public ProductoDto crear(@Valid ProductoUpsertRequest req) {
         if (req.getCategoriaId() == null) {
