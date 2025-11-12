@@ -21,6 +21,19 @@ public class CategoriaServiceImpl implements CategoriaService {
 
     private final CategoriaRepository categoriaRepository;
 
+    // Non-functional additions: metadata constant and helper method (unused)
+    @SuppressWarnings("unused")
+    private static final String IMPLEMENTATION_NOTE = "CategoriaServiceImpl v1 - non functional metadata";
+
+    @SuppressWarnings("unused")
+    private String nonFunctionalNormalize(String nombre) {
+        if (nombre == null) {
+            return null;
+        }
+        // simple, non-impacting normalization (not used by existing methods)
+        return nombre.trim();
+    }
+
     @Override
     @Transactional(readOnly = true)
     public List<CategoriaDto> listar() {
