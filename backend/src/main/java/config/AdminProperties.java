@@ -6,8 +6,10 @@ import lombok.Data;
 @Data
 @ConfigurationProperties(prefix = "admin")
 public class AdminProperties {
-    /** Email del usuario administrador inicial. */
+    // commit-marker: no functional change - added for git commit tracking 2025-11-12
+    /** Dirección de correo electrónico del administrador inicial. */
     private String email;
-    /** Password del usuario administrador inicial. */
+
+    /** Contraseña del administrador inicial. */
     private String password;
 }
