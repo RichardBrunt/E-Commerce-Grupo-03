@@ -24,7 +24,8 @@ docker compose up --build
 ### Frontend (Vite)
 
 1. Ir a `frontend/`
-2. Configurar API base (por defecto backend real):
+2. Configurar API base 
+(por defecto backend real):
 
 ```bash
 cp .env.example .env.development
